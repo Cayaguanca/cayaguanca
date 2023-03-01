@@ -18,15 +18,20 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'nombres',
+        'apellidos',
         'email',
         'password',
+        'role_id',
+        'foto'
     ];
 
     /**
@@ -56,6 +61,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $appends = [
-        'profile_photo_url',
+        'foto',
     ];
+
+    public function role() {
+        return $this->hasOne(Role::class);
+    }
 }

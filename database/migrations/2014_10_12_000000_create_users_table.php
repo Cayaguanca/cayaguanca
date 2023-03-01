@@ -13,13 +13,19 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+
+            $table->string('nombres', 50);
+            $table->string('apellidos', 50);
+            $table->string('email', 100)->unique();
+            //$table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('foto', 2048)->nullable();
             $table->rememberToken();
-            $table->foreignId('current_team_id')->nullable();
-            $table->string('profile_photo_path', 2048)->nullable();
+
+            // Restricciones para llave foranea de roles
+            $table->unsignedBigInteger('role_id');
+            $table->foreign('role_id')->references('id')->on('roles')->onUpdate('cascade')->onDelete('restrict');
+
             $table->timestamps();
         });
     }
