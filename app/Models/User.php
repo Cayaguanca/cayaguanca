@@ -26,7 +26,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'nombres',
+        'name',
         'apellidos',
         'email',
         'password',
@@ -61,7 +61,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $appends = [
-        'foto',
+        'profile_photo_url',
     ];
 
     public function role() {
