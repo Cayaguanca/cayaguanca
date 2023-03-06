@@ -18,7 +18,9 @@ return new class extends Migration
 
             $table->string('nombre_municipio', 25);
             $table->string('codigo_postal', 5)->unique();
-            $table->string('escudo')->nullable();
+            $table->string('file_name')->nullable();
+            $table->string('file_extension')->nullable();
+            $table->string('file_path')->nullable();
             $table->date('fecha_afiliacion');
             $table->string('descripcion_municipio',255);
 

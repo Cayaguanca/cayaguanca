@@ -27,8 +27,11 @@ Route::middleware([
     })->name('dashboard');
 });
 
+Route::middleware(['guest'])->group(function (){
+    Route::view('/municipios', 'municipios.municipios')->name('ListaMunicipios');
+});
 
-Route::view('/donantes', 'donantes.donantes')->name('ListaDonantes');
+Route::view('/donantes', 'donantes.donantes')->middleware('guest')->name('ListaDonantes');
 Route::view('/proyectos', 'proyectos.proyectos')->name('ListaProyectos');
-Route::view('/municipios', 'municipios.municipios')->name('ListaMunicipios');
+
 Route::view('/galeria', 'galerias.galerias')->name('ListaGaleria');

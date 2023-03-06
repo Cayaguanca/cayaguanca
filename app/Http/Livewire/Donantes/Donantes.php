@@ -16,5 +16,6 @@ class Donantes extends Component
 
     public function mount() {
         $this->donantes = Donante::all();
+        $this->middleware('guest');
     }
 }
