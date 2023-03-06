@@ -14,6 +14,64 @@
     z-index: 99;
 }
 
+.contenedorEditar svg{
+    width: 20px;
+    height: 20px;
+    color: 008A0E;
+}   
+svg{
+    
+    fill: currentColor;
+}
+
+thead{
+    background-color: #4B9B4F;
+    color: #E8F5E9;
+}
+tr td{
+    background-color: #FFFFFF;
+}
+
+
+
+tr td, th {     
+    border-top-right-radius: 0;               
+    border-top-left-radius: 0; 
+    border-bottom-left-radius: 0; 
+    border-bottom-right-radius: 0; 
+}
+th:first-child { 
+    
+    border-top-left-radius: 20px; 
+}
+th:last-child {   
+    
+    border-top-right-radius: 20px; 
+}
+tr:last-child td:first-child { 
+    border-bottom-left-radius: 20px; 
+}
+tr:last-child td:last-child { 
+    border-bottom-right-radius: 20px; 
+}
+
+.borde{
+    padding-top: 10px;
+    
+}
+.table-bordered{
+    border-color: #ccccd6;
+}
+.centrar{
+    text-align: center;
+}
+.img-circular{
+    border-radius: 50%;
+}
+.color-fondo{
+    background-color: #eef0f7;
+}
+
 h1,
 .h1,
 h2,
