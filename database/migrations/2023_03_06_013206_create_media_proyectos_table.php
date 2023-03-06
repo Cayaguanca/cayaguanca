@@ -21,7 +21,7 @@ return new class extends Migration
             
             // Llave foránea de proyecto
             $table->unsignedBigInteger('proyecto_id');
-            $table->foreign('evento_id')->references('id')->on('eventos')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('proyecto_id')->references('id')->on('proyectos')->onDelete('restrict')->onUpdate('cascade');
 
             $table->timestamps();
         });
