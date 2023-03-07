@@ -10,8 +10,9 @@ class Municipios extends Component
     use WithFileUploads;
     
     public $municipios;
-    public $nombre_municipio,$codigo_postal,$escudo
+    public $municipio_id,$nombre_municipio,$codigo_postal,$escudo
     ,$fecha_afiliacion,$descripcion_municipio;
+    public $file_name,$file_extension,$file_path;
     public $modal = false;
 
     protected $rules = [
@@ -23,29 +24,30 @@ class Municipios extends Component
     ];
 
     public function mount(){
-        $this->middleware('guest');
+        //$this->middleware('guest');
     }
 
     public function render()
     {
         $this->municipios = Municipio::all();
 
-       //dd($this->municipios);
+        //dd($this->municipios);
         return view('livewire.municipios.municipios');
     }
     public function save(){
         $this->validate();
 
-        $newMunicipio = new Municipio();
-        $newMunicipio->nombre_municipio = $this->nombre_municipio;
-        $newMunicipio->codigo_postal = $this->codigo_postal;
-        $newMunicipio->file_name = $this->escudo->getClientOriginalName();
-        $newMunicipio->file_extension = $this->escudo->extension();
-        $newMunicipio->file_path = 'storage/' . $this->escudo->store('file', 'public');
-        $newMunicipio->fecha_afiliacion = $this->fecha_afiliacion;
-        $newMunicipio->descripcion_municipio = $this->descripcion_municipio;
+        $id = $this->municipio_id;
+        $newMunicipio = Municipio::updateOrCreate(['id'=>$id],[
+            'nombre_municipio' => $this->nombre_municipio,
+            'codigo_postal' => $this->codigo_postal,
+            'file_name'=> $this->escudo->getClientOriginalName(),
+            'file_extension' => $this->escudo->extension(),
+            'file_path' => 'storage/' . $this->escudo->store('file', 'public'),
+            'fecha_afiliacion' => $this->fecha_afiliacion,
+            'descripcion_municipio' => $this->descripcion_municipio
+        ]);
         $newMunicipio->save();
-
         return session()->flash("success", "This is success message");
     }
     public function abrirModal()
@@ -55,6 +57,32 @@ class Municipios extends Component
     public function cerrarModal()
     {
         $this->modal = false;
+    }
+    public function limpiarCampo(){
+        $this->municipio_id='';
+        $this->nombre_municipio='';
+        $this->codigo_postal='';
+        $this->escudo='';
+        $this->fecha_afiliacion='';
+        $this->descripcion_municipio='';
+    }
+    public function editar($id){
+        $this->limpiarCampo();
+        $municipioEdit = Municipio::findOrFail($id);
+        $this->municipio_id = $municipioEdit->id;
+        $this->nombre_municipio = $municipioEdit->nombre_municipio;
+        $this->codigo_postal = $municipioEdit->codigo_postal;
+        $this->fecha_afiliacion = $municipioEdit->fecha_afiliacion;
+        $this->descripcion_municipio = $municipioEdit->descripcion_municipio;
+        
+        $this->abrirModal();
+    }
+
+    public function delete($id){
+        $this->municipio_id=$id;
+    }
+    public function delete_now(){
+        Municipio::find($this->municipio_id)->delete();
     }
 
 
