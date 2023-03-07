@@ -13,16 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('municipios', function (Blueprint $table) {
+        Schema::create('media_evento', function (Blueprint $table) {
             $table->id();
 
-            $table->string('nombre_municipio', 25);
-            $table->string('codigo_postal', 5)->unique();
             $table->string('file_name')->nullable();
             $table->string('file_extension')->nullable();
             $table->string('file_path')->nullable();
-            $table->date('fecha_afiliacion');
-            $table->string('descripcion_municipio',255);
+            
+            // Llave foránea de evento
+            $table->unsignedBigInteger('evento_id');
+            $table->foreign('evento_id')->references('id')->on('eventos')->onDelete('restrict')->onUpdate('cascade');
 
             $table->timestamps();
         });
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('municipios');
+        Schema::dropIfExists('media_evento');
     }
 };

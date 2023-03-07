@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Municipio extends Model
+
+class Municipio extends Model 
 {
     use HasFactory;
     protected $table = 'municipios';
@@ -13,7 +14,9 @@ class Municipio extends Model
     protected $fillable= [
         'nombre_municipio',
         'codigo_postal',
-        'escudo',
+        'file_name',
+        'file_extension',
+        'file_path',
         'fecha_afiliacion',
         'descripcion_municipio'
     ];
