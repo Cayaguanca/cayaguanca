@@ -62,6 +62,7 @@ class Proyectos extends Component
             $file_save->proyecto_id = $new_proyecto->id;
             $file_save->save();
         }
+        //dd($this->atach_detalle);
         $new_proyecto->detalle_proyectos()->attach($this->atach_detalle);
         $new_proyecto->municipios()->attach($this->atach_municipio);
         $new_proyecto->donantes()->attach($this->atach_donante);
@@ -76,9 +77,7 @@ class Proyectos extends Component
         
         array_push($this->atach_detalle,$new_detalle->id);
         array_push($this->atach_municipio,$this->municipio_id);
-        foreach($this->atach_municipio as $muni){
-            dd($muni);
-        }
+        
         
     }
 

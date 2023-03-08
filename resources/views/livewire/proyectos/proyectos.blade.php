@@ -145,7 +145,7 @@
                             
                         </div>
                         <div class="col-8">
-                            <button  type="button" class="btn btn-primary me-2"> Agregar donante</button>
+                            <button wire:click="save_donante()"  type="button" class="btn btn-primary me-2"> Agregar donante</button>
                         </div>  
                     </div>
                     <div class="form-group mb-3">
