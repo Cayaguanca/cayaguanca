@@ -79,18 +79,6 @@
                     <a href="" class="nav-item nav-link active">Inicio</a>
                     <a href="" class="nav-item nav-link">Contáctanos</a>
                     <a href="" class="nav-item nav-link">Sobre Nosotros</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Administración</a>
-                        <div class="dropdown-menu bg-light m-0">
-                            <a href="" class="dropdown-item">Usuarios</a>
-                            <a href="" class="dropdown-item">Proyectos</a>
-                            <a href="" class="dropdown-item">Eventos</a>
-                            <a href="" class="dropdown-item">Donantes</a>
-                            <a href="" class="dropdown-item">Municipios</a>
-                            <a href="" class="dropdown-item">Suscriptores</a>
-                            <a href="" class="dropdown-item">Galería</a>
-                        </div>
-                    </div>
                 </div>
                 <a href="" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block">Proyectos<i
                         class="fa fa-arrow-right ms-3"></i></a>

@@ -56,7 +56,11 @@
                         <a class="btn btn-link text-light" href=""><i class="fab fa-instagram"></i></a>
                         @if (Route::has('login'))
                             @auth
-                                <a href="{{ route('logout') }}" class="btn btn-link text-light fw-bold">Cerrar Sesión</a>
+                                <a href="" class="btn btn-link text-light fw-bold">Ver Perfil</a>
+                                <a class="btn btn-link text-light fw-bold" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión</a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             @else
                                 <a href="{{ route('login') }}" class="btn btn-link text-light fw-bold">Iniciar Sesión</a>
                             @endauth
