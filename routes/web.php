@@ -32,4 +32,5 @@ Route::group(['middleware' => 'guest'], function() {
     Route::view('/proyectos', 'proyectos.proyectos')->name('ListaProyectos');
     Route::view('/municipios', 'municipios.municipios')->name('ListaMunicipios');
     Route::view('/galeria', 'galerias.galerias')->name('ListaGaleria');
+    Route::view('/suscriptores', 'suscriptores.suscriptores')->name('ListaSuscriptores');
 });
