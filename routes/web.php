@@ -30,4 +30,5 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 });
 
 Route::group(['middleware' => 'guest'], function () {
+    Route::view('/galerias', 'galerias.galerias')->name('ListaGaleria');
 });

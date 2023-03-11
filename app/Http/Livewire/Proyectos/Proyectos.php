@@ -9,15 +9,16 @@ use App\Models\MediaProyecto;
 use App\Models\Municipio;
 use App\Models\Proyecto;
 use Livewire\WithFileUploads;
+use Intervention\Image\ImageManagerStatic as Image; 
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Proyectos extends Component
 {
     use WithFileUploads;
-
+    
     //valiables
     public $modal=false;
-
+    public $detallesAdd=[],$donanteAdd=[],$municipiosAdd=[];
     //variables de tabla proyectos
     public $proyectos, $id_proyecto, $nombre_proyecto, $descripcion_proyecto, $fecha_inicio,$fecha_final;
 
@@ -31,7 +32,7 @@ class Proyectos extends Component
     public $municipios,$proyectoMun_id, $municipio_id, $atach_municipio=[];
 
     //variables de tabla media_proyecto
-    public $file_name,$file_extension,$file_path,$proyectoImg_id,$files=[];
+    public $file_name,$file_extension,$file_path,$proyectoImg_id,$files=[],$img;
 
     public function mount(){
 
@@ -56,17 +57,26 @@ class Proyectos extends Component
         ]);
         foreach ($this->files as $key => $file){
             $file_save = new MediaProyecto();
+            //$manupulator = new ImageManipulator($file);
+            //$this->resizeImage($file);
+            
             $file_save->file_name = $file->getClientOriginalName();
             $file_save->file_extension = $file->extension();
-            $file_save->file_path = 'storage/' . $file->store('file', 'public');
+            $file_save->file_path = 'storage/' . $file->store('file', 'public')->resize(200,200);
             $file_save->proyecto_id = $new_proyecto->id;
+
             $file_save->save();
         }
+        //dd($this->detallesAdd);
         $new_proyecto->detalle_proyectos()->attach($this->atach_detalle);
         $new_proyecto->municipios()->attach($this->atach_municipio);
         $new_proyecto->donantes()->attach($this->atach_donante);
     }
-    
+    public function resizeImage($image) { 
+        $this->img = Image::make($image);
+        $this->img->resize(200, 200); 
+        $this->img->save(); 
+    }
     public function save_detalle_proyecto(){
         $new_detalle = new DetalleProyecto();
 
@@ -75,15 +85,17 @@ class Proyectos extends Component
         $new_detalle->save();
         
         array_push($this->atach_detalle,$new_detalle->id);
+        array_push($this->detallesAdd,DetalleProyecto::findOrFail($new_detalle->id));
+        //dd($this->detallesAdd);
+        
         array_push($this->atach_municipio,$this->municipio_id);
-        foreach($this->atach_municipio as $muni){
-            dd($muni);
-        }
+        array_push($this->municipiosAdd,Municipio::findOrFail($this->municipio_id));
         
     }
 
     public function save_donante(){
         array_push($this->atach_donante,$this->donante_id);
+        array_push($this->donanteAdd,Donante::findOrFail($this->donante_id));
     }
 
     public function abrirModal()
@@ -94,5 +106,13 @@ class Proyectos extends Component
     public function cerrarModal()
     {
         $this->modal = false;
+    }
+
+    public function delete_detalle(){
+
+    }
+
+    public function delete_donante(){
+
     }
 }
