@@ -37,5 +37,8 @@ class Proyecto extends Model
 
     public function detalle_proyectos() {
         return $this->belongsToMany(DetalleProyecto::class);
+
+    }public function media_proyecto() {
+        return $this->hasMany(MediaProyecto::class);
     }
 }
