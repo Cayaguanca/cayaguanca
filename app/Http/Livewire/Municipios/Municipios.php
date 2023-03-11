@@ -38,15 +38,25 @@ class Municipios extends Component
         $this->validate();
 
         $id = $this->municipio_id;
-        $newMunicipio = Municipio::updateOrCreate(['id'=>$id],[
-            'nombre_municipio' => $this->nombre_municipio,
-            'codigo_postal' => $this->codigo_postal,
-            'file_name'=> $this->escudo->getClientOriginalName(),
-            'file_extension' => $this->escudo->extension(),
-            'file_path' => 'storage/' . $this->escudo->store('file', 'public'),
-            'fecha_afiliacion' => $this->fecha_afiliacion,
-            'descripcion_municipio' => $this->descripcion_municipio
-        ]);
+        if($this->escudo == ''){
+            $newMunicipio = Municipio::updateOrCreate(['id'=>$id],[
+                'nombre_municipio' => $this->nombre_municipio,
+                'codigo_postal' => $this->codigo_postal,
+                'fecha_afiliacion' => $this->fecha_afiliacion,
+                'descripcion_municipio' => $this->descripcion_municipio
+            ]);    
+        }else{
+            $newMunicipio = Municipio::updateOrCreate(['id'=>$id],[
+                'nombre_municipio' => $this->nombre_municipio,
+                'codigo_postal' => $this->codigo_postal,
+                'file_name'=> $this->escudo->getClientOriginalName(),
+                'file_extension' => $this->escudo->extension(),
+                'file_path' => 'storage/' . $this->escudo->store('file', 'public'),
+                'fecha_afiliacion' => $this->fecha_afiliacion,
+                'descripcion_municipio' => $this->descripcion_municipio
+            ]);
+        }
+        
         $newMunicipio->save();
         return session()->flash("success", "This is success message");
     }

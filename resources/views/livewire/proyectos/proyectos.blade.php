@@ -123,6 +123,10 @@
                                     </button>
                                 </div>  
                             </div>
+                            <!--A revisar por que da errir de lectura de direccion_proyecto -->>
+                            <div  wire:ignore.self class="row mb-3">
+                                
+                            </div>
                         </div>
                     </div>
                     <!--Apartado para agregar donantes-->
