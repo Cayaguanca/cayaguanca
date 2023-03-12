@@ -110,9 +110,8 @@
                     <div class="form-group mb-3">
                         <label for="foto" class="form-label fw-bold">Foto de perfil</label>
                         @if ($edit && ! $foto == null)
-                            <div class="text-center">
+                            <div class="text-center mb-3">
                                 <img src={{ asset($foto) }} alt="Foto" width="120" height="120">
-                                <img src="{{$foto->temporaryUrl()}}" alt="" width="100" height="100">
                                 <button type="button" data-bs-toggle="modal" data-bs-target="#deleteFotoModal" class="btn">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" color="rgba(158, 0, 0, 1)" class="bi bi-trash" viewBox="0 0 16 16">
                                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>

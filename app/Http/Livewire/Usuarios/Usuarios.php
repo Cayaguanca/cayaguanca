@@ -18,7 +18,7 @@ class Usuarios extends Component
     public $modal = false, $edit = false, $delete = false;
 
     // Variables para los registros de usuarios
-    public $usuarios, $user_id, $nombres, $apellidos, $email, $password, $role_id, $foto, $identificador;
+    public $usuarios, $user_id, $nombres, $apellidos, $email, $password, $role_id, $foto, $identificador, $foto_antigua;
 
     // Variables para los registros de roles
     public $roles, $nombre_rol;
@@ -44,7 +44,7 @@ class Usuarios extends Component
 
     public function save() {
         $id = $this->user_id;
-        
+
         $this->validate();
         User::updateOrCreate(['id' => $id], [
             'name' => $this->nombres,
@@ -75,6 +75,7 @@ class Usuarios extends Component
         $this->password = $user->password;
         $this->role_id = $user->role_id;
         $this->foto = $user->file_path;
+        $this->foto_antigua = $user->file_path;
     }
 
     public function delete($id) {
@@ -84,11 +85,16 @@ class Usuarios extends Component
 
     public function deleteUser() {
         $usuario = User::findOrFail($this->user_id);
+        $this->deleteFoto();
         $usuario->delete();
     }
 
     public function deleteFoto() {
         $usuario = User::findOrFail($this->user_id);
+
+        $url = str_replace('storage', 'public', $usuario->file_path);
+        Storage::delete($url);
+
         $usuario->file_name = null;
         $usuario->file_extension = null;
         $usuario->file_path = null;
