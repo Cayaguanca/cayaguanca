@@ -6,3 +6,4 @@
     </x-slot>
     @livewire('suscriptores.suscriptores')
 </x-app-layout>
+

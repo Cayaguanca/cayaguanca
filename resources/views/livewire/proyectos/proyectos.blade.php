@@ -125,7 +125,9 @@
                             </div>
                             <!--A revisar por que da errir de lectura de direccion_proyecto -->>
                             <div  wire:ignore.self class="row mb-3">
-                                
+                                @foreach($detallesAdd as $detalle)
+                                    <label for="">{{$detalle}} </label>
+                                @endforeach
                             </div>
                         </div>
                     </div>
