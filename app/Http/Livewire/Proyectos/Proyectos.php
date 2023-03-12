@@ -85,7 +85,8 @@ class Proyectos extends Component
         $new_detalle->save();
         
         array_push($this->atach_detalle,$new_detalle->id);
-        array_push($this->detallesAdd,DetalleProyecto::findOrFail($new_detalle->id));
+        $var = DetalleProyecto::findOrFail($new_detalle->id);
+        array_push($this->detallesAdd,$var->direccion_proyecto);
         //dd($this->detallesAdd);
         
         array_push($this->atach_municipio,$this->municipio_id);

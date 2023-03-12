@@ -95,7 +95,7 @@
                 </div>
                 <div class="modal-body">
                     <h2>Selecione las imagenes a cargar:</h2>
-                    <input wire:model="files" type="file" accept="image/png,image/jpg,image/jpeg,image/svg" id="foto" class="form-control" multiple>
+                    <input id="{{$identificador}}" wire:model="files" type="file" accept="image/png,image/jpg,image/jpeg,image/svg" class="form-control" multiple>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -114,7 +114,7 @@
                 </div>
                 <h2 class="text-center">Esta seguro que desea eliminar la siguiente imagen: </h2>
                 <div class="modal-body">
-                    <!--<img src= {{$direccion}} class="img-fluid rounded mx-auto d-block" style="max-width: 100%; height: auto; " alt=".." > -->
+                    <img id="{{$identificador2}}" src= {{$direccion}} class="img-fluid rounded mx-auto d-block" style="max-width: 100%; height: auto; " alt=".." >
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
