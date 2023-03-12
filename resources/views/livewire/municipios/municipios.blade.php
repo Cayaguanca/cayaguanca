@@ -124,7 +124,7 @@
                 </div>
                 <div class="modal-footer">
                     <button  type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button wire:click.prevent="save()" type="button" class="btn btn-primary" data-dismiss="modal" >Guardar</button>
+                    <button wire:click.prevent="save()" type="button" class="btn btn-primary" data-bs-dismiss="modal" >Guardar</button>
                 </div>
             </div>
         </div>

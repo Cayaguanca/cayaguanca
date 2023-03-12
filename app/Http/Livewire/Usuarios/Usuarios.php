@@ -44,21 +44,21 @@ class Usuarios extends Component
 
     public function save() {
         $id = $this->user_id;
-        //$this->abrirModal();
-        if(!empty($this->foto)) {
-            $ruta_foto = $this->foto->store('profiles');
-        } else {
-            $ruta_foto = null;
-        }
+        
         $this->validate();
-        $user = User::updateOrCreate(['id' => $id], [
+        User::updateOrCreate(['id' => $id], [
             'name' => $this->nombres,
             'apellidos' => $this->apellidos,
             'email' => $this->email,
             'password' => $this->password,
-            'profile_photo_url' => $ruta_foto,
-            'role_id' => $this->role_id
+            'role_id' => $this->role_id,
+            'file_name' => $this->foto == null ? null : $this->foto->getClientOriginalName(),
+            'file_extension' => $this->foto == null ? null : $this->foto->extension(),
+            'file_path' => $this->foto == null ? null : 'storage/' . $this->foto->store('profile', 'public'),
         ]);
+
+        //$user->profile_photo_path = $ruta_foto;
+        //$user->save();
 
         $this->limpiarCampos();
         $this->identificador = rand();
@@ -72,7 +72,9 @@ class Usuarios extends Component
         $this->nombres = $user->name;
         $this->apellidos = $user->apellidos;
         $this->email = $user->email;
+        $this->password = $user->password;
         $this->role_id = $user->role_id;
+        $this->foto = $user->file_path;
     }
 
     public function delete($id) {
@@ -83,6 +85,16 @@ class Usuarios extends Component
     public function deleteUser() {
         $usuario = User::findOrFail($this->user_id);
         $usuario->delete();
+    }
+
+    public function deleteFoto() {
+        $usuario = User::findOrFail($this->user_id);
+        $usuario->file_name = null;
+        $usuario->file_extension = null;
+        $usuario->file_path = null;
+        $this->foto = null;
+
+        $usuario->save();
     }
 
     public function abrirModalEliminar() {

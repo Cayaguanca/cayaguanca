@@ -12,7 +12,10 @@ class Donante extends Model
     protected $table = 'donantes';
 
     protected $fillable = [
-        'nombre'
+        'nombre',
+        'file_name',
+        'file_extension',
+        'file_path'
     ];
 
     public function eventos() {
