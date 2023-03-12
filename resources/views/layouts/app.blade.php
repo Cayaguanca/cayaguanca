@@ -7,6 +7,10 @@
 
         <title>Cayaguanca</title>
 
+        <link href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+
         <!-- Favicon -->
         <link href="{{ asset('img/favicon.ico') }}" rel="icon">
 
@@ -48,7 +52,7 @@
                     </div>
                 </div>
                 <div class="col-lg-5 px-5 text-end">
-                    <div class="h-100 d-inline-flex align-items-center mx-n2">
+                    <div class="h-100 d-inline-flex align-items-center mx-n2 text-end">
                         <span>Follow Us:</span>
                         <a class="btn btn-link text-light" href=""><i class="fab fa-facebook-f"></i></a>
                         <a class="btn btn-link text-light" href=""><i class="fab fa-twitter"></i></a>
@@ -89,10 +93,10 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Administración</a>
                         <div class="dropdown-menu bg-light m-0">
-                            <a href="" class="dropdown-item">Usuarios</a>
+                            <a href="{{ route('ListaUsuarios') }}" class="dropdown-item">Usuarios</a>
                             <a href="" class="dropdown-item">Proyectos</a>
                             <a href="" class="dropdown-item">Eventos</a>
-                            <a href="" class="dropdown-item">Donantes</a>
+                            <a href="{{ route('ListaDonantes') }}" class="dropdown-item">Donantes</a>
                             <a href="" class="dropdown-item">Municipios</a>
                             <a href="" class="dropdown-item">Suscriptores</a>
                             <a href="" class="dropdown-item">Galería</a>
