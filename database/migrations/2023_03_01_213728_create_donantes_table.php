@@ -17,6 +17,9 @@ return new class extends Migration
             $table->id();
 
             $table->string('nombre', 50);
+            $table->string('file_name')->nullable();
+            $table->string('file_extension')->nullable();
+            $table->string('file_path')->nullable();
 
             $table->timestamps();
         });

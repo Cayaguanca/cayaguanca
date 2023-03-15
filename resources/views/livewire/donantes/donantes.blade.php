@@ -12,6 +12,7 @@
                 <tr>
                     <th>N°</th>
                     <th>Nombre</th>
+                    <th>Logo</th>
                     <th class="text-center">Acciones</th>
                 </tr>
             </thead>
@@ -20,6 +21,9 @@
                     <tr>
                         <td>{{ $donante->id }}</td>
                         <td>{{ $donante->nombre }}</td>
+                        <td>
+                            <img src={{ asset($donante->file_path) }} alt="Logo" width="120" height="120">
+                        </td>
                         <td class="text-center">
                             <button wire:click="show({{ $donante->id }})" type="button" data-bs-toggle="modal" data-bs-target="#registerModal" class="btn">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" color="rgba(0, 138, 14, 1)" class="bi bi-pencil-square" viewBox="0 0 16 16" >
@@ -56,6 +60,10 @@
                     <div class="form-group mb-3">
                         <label for="nombre" class="form-label fw-bold">Nombre</label>
                         <input wire:model="nombre" type="text" id="nombre" class="form-control" placeholder="Nombre del donante">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="logo" class="form-label fw-bold">Logo del donante</label>
+                        <input wire:model="logo" type="file" accept="image/*" id="{{$identificador}}" class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">

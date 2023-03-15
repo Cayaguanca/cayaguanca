@@ -123,8 +123,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button wire:click="limpiarCampo()"  type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary" data-dismiss="modal" >Guardar</button>
+                    <button  type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button wire:click.prevent="save()" type="button" class="btn btn-primary" data-bs-dismiss="modal" >Guardar</button>
                 </div>
                 </form>
             </div>
@@ -152,20 +152,3 @@
     </div>
 
 </div>
-<script type="text/javascript">
-    document.addEventListener('livewire:load', function () {
-        let data = @this.eventos
-        console.log(data) 
-        $('#municipios').dataTable( {
-        /*data : data,
-        columns: [
-                  {"data" : "id"},
-                  {"data" : "nombre_evento"},
-                  {"data" : "descripcion_evento"},
-                  {"data" : "id"}                
-                  ],
- 
-        */});
-
-    })
-</script>

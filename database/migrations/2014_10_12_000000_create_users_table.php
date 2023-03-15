@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('email', 100)->unique();
             //$table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('profile_photo_url', 2048)->nullable();
+            $table->string('file_name')->nullable();
+            $table->string('file_extension')->nullable();
+            $table->string('file_path')->nullable();
             $table->rememberToken();
 
             // Restricciones para llave foranea de roles

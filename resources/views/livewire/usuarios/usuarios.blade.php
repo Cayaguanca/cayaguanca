@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 <!-- Tabla usuarios  -->
-                <table class="display table-bordered table table-striped" style="width:100%">
+                <table class="display table-bordered table table-striped text-center" style="width:100%">
                     <thead>
                         <tr>
                             <th>N°</th>
@@ -29,11 +29,7 @@
                                 <td>{{ $usuario->name }}</td>
                                 <td>{{ $usuario->apellidos }}</td>
                                 <td>
-                                    @if ($usuario->profile_photo_url == null)
-                                        <img src="{{ $usuario->profile_photo_url }}" alt="foto" width="120" height="120">
-                                    @else
-                                        <p>Sin Foto</p>
-                                    @endif
+                                    <img src={{ asset($usuario->file_path) }} alt="foto" width="120" height="120">
                                 </td>
                                 <td>{{ $usuario->email }}</td>
                                 @if ($usuario->role_id == 1)
@@ -113,6 +109,18 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="foto" class="form-label fw-bold">Foto de perfil</label>
+                        @if ($edit && ! $foto == null)
+                            <div class="text-center mb-3">
+                                <img src={{ asset($foto) }} alt="Foto" width="120" height="120">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#deleteFotoModal" class="btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" color="rgba(158, 0, 0, 1)" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                    </svg>
+                                    Eliminar foto
+                                </button>
+                            </div>
+                        @endif
                         <input wire:model="foto" type="file" accept="image/*" id="{{$identificador}}" class="form-control">
                     </div>
                     @if ($foto && $modal)
@@ -147,6 +155,25 @@
                 <div class="modal-footer">
                     <button wire:click="cerrarModalEliminar()" type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-target="#deleteModal">Cancelar</button>
                     <button wire:click="deleteUser()" data-bs-toggle="modal" data-bs-target="#deleteModal" type="button" class="btn btn-danger">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Eliminar Foto -->
+    <div wire:ignore.self data-bs-backdrop="static" class="modal fade" id="deleteFotoModal" tabindex="-1" aria-labelledby="deleteFotoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
+                    <h1 class="modal-title fs-5" style="color: #fff" id="exampleModalLabel">Eliminar Foto de Perfil</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Está seguro/a que desea eliminar la foto de perfil?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-target="#deleteFotoModal">Cancelar</button>
+                    <button wire:click="deleteFoto()" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#deleteFotoModal" type="button" class="btn btn-danger">Confirmar</button>
                 </div>
             </div>
         </div>

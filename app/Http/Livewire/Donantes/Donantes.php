@@ -4,18 +4,22 @@ namespace App\Http\Livewire\Donantes;
 
 use App\Models\Donante;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Donantes extends Component
 {
+    use WithFileUploads;
+
     // varibales para controlar modales
     public $modal = false, $edit = false, $delete = false;
     // variables para los registros de donantes
-    public $donantes, $donante_id, $nombre;
+    public $donantes, $donante_id, $nombre, $logo, $identificador;
 
     public function mount() {
         $this->modal = false;
         $this->edit = false;
         $this->delete = false;
+        $this->identificador = rand();
     }
     public function render()
     {
@@ -27,10 +31,14 @@ class Donantes extends Component
         $id = $this->donante_id;
 
         Donante::updateOrCreate(['id' => $id], [
-            'nombre' => $this->nombre
+            'nombre' => $this->nombre,
+            'file_name' => $this->logo ? $this->logo->getClientOriginalName() : '',
+            'file_extension' => $this->logo ? $this->logo->extension() : '',
+            'file_path' => $this->logo ? 'storage/' . $this->logo->store('logo', 'public') : '',
         ]);
 
         $this->limpiarCampos();
+        $this->identificador = rand();
     }
 
     public function show($id) {
