@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
+        <link href="{{ asset ('DataTables/datatables.css') }}">
         <title>Cayaguanca</title>
 
         <link href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -195,9 +196,14 @@
 
         <!-- Template Javascript -->
         <script src="{{ asset('js/main.js') }}"></script>
+        
+        <script src="{{ asset('DataTables/datatables.js') }}"></script>
+
 
         @stack('modals')
-
         @livewireScripts
+        
+        
+
     </body>
 </html>

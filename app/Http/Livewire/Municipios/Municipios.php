@@ -56,8 +56,8 @@ class Municipios extends Component
                 'descripcion_municipio' => $this->descripcion_municipio
             ]);
         }
-        
         $newMunicipio->save();
+        $this->limpiarCampo();
         return session()->flash("success", "This is success message");
     }
     public function abrirModal()

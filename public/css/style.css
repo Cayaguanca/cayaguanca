@@ -211,7 +211,13 @@ h6,
     }
 }
 
-
+.grupo-modal {
+    border: 1px solid rgb(179, 185, 190);
+    padding: 5%;
+}
+.oculto{
+    display: none;
+}
 /*** Header ***/
 .carousel-caption {
     top: 0;

@@ -4,7 +4,7 @@
         <h1>Municipios</h1>
         
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button wire:click="limpiarCampo()" type="button" data-bs-toggle="modal" data-bs-target="#editModal"
+            <button type="button" data-bs-toggle="modal" data-bs-target="#editModal"
             class="btn btn-primary me-2"> Registrar nuevo municipio </button>
         </div>
         <div class="row align-items-start my-3">
@@ -77,7 +77,7 @@
                 </div>
 
                 <div class="modal-body">
-                    
+                    <form wire:submit.prevent="save()">
                     <div class="form-group mb-3">
                         
                         <label for="nombre_municipio" class="form-label fw-bold">Nombres de municipio</label>
@@ -123,9 +123,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button  type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button wire:click.prevent="save()" type="button" class="btn btn-primary" data-dismiss="modal" >Guardar</button>
+                    <button wire:click="limpiarCampo()"  type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal" >Guardar</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -151,3 +152,20 @@
     </div>
 
 </div>
+<script type="text/javascript">
+    document.addEventListener('livewire:load', function () {
+        let data = @this.eventos
+        console.log(data) 
+        $('#municipios').dataTable( {
+        /*data : data,
+        columns: [
+                  {"data" : "id"},
+                  {"data" : "nombre_evento"},
+                  {"data" : "descripcion_evento"},
+                  {"data" : "id"}                
+                  ],
+ 
+        */});
+
+    })
+</script>

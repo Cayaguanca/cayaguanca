@@ -1,11 +1,5 @@
 <div>
-
-
-
-    <link href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
-    
+   
     <div class="container p-5">
         <h1>Suscritores Newsletter</h1>
         <div class="row align-items-start">
@@ -33,25 +27,25 @@
 </div>
 
 <script>
-        $(document).ready(function() {
-            $('#suscriptores').DataTable({
-                order: [
-                    [0, 'asc']
-                ],
-                "language": {
-                    "lengthMenu": "Mostrar _MENU_",
-                    "zeroRecords": "No se encuentran datos relacionados ",
-                    "info": "Mostrando página _PAGE_ de _PAGES_",
-                    "infoEmpty": "No hay registros disponibles ",
-                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                    'search':'Buscar',
-                    'paginate': {
-                        'first':      'Primero',
-                        'last':       'Ultimo',
-                        'next':      'Siguiente',
-                        'previous':  'Anterior',
-                    },
+    $(document).ready(function() {
+        $('#suscriptores').DataTable({
+            order: [
+                [0, 'asc']
+            ],
+            "language": {
+                "lengthMenu": "Mostrar _MENU_",
+                "zeroRecords": "No se encuentran datos relacionados ",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles ",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                'search':'Buscar',
+                'paginate': {
+                    'first':      'Primero',
+                    'last':       'Ultimo',
+                    'next':      'Siguiente',
+                    'previous':  'Anterior',
                 },
-            });
+            },
         });
-    </script>
+    });
+</script>
