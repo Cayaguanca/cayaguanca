@@ -11,6 +11,9 @@
                     <label for="municipios" class="form-label fw-bold">Municipios</label>
                     <select class="form-control" name="municipios" id="municipios">
                         <option value="">Seleccione...</option>
+                        @foreach ($municipios as $municipio)
+                            <option value="{{ $municipio->id }}">{{ $municipio->nombre_municipio}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -19,8 +22,8 @@
                 @foreach ($proyectos as $proyecto)    
                     <div class="card mb-3">
                         <div class="row no-gutters">
-                            <div class="col-md-4">
-                                <img src="..." alt="imagen" class="card-img">
+                            <div class="col-md-4 d-flex align-items-center">
+                                <img class="card-img ms-3" src={{ asset($fotos[$proyecto->id - 1]) }} alt="imagen">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
