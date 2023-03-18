@@ -27,6 +27,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::view('/municipios', 'municipios.municipios')->name('ListaMunicipios');
     Route::view('/galeria', 'galerias.galerias')->name('ListaGaleria');
     Route::view('/usuarios', 'usuarios.usuarios')->name('ListaUsuarios');
+    Route::view('/suscriptores','suscriptores.suscriptores')->name('ListaSuscriptores');
+    Route::view('/eventos','eventos.eventos')->name('ListaEventos');
 });
 
 Route::group(['middleware' => 'guest'], function () {

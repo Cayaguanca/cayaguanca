@@ -16,12 +16,8 @@ return new class extends Migration
         Schema::create('detalle_eventos', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('proyecto_id');
-            $table->unsignedBigInteger('donante_id');
-
-            $table->foreign('proyecto_id')->references('id')->on('proyectos')->onDelete('cascade');
-            $table->foreign('donante_id')->references('id')->on('donantes')->onDelete('cascade');
-
+            $table->date('fecha_evento'); // Cambiar a dateTime
+            $table->string('direccion_evento',100);
             $table->timestamps();
         });
     }

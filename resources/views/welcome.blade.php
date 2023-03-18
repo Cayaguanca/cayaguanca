@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <link href="{{ asset ('DataTables/datatables.css') }}">
         <title>Cayaguanca</title>
 
         <!-- Favicon -->
@@ -369,7 +369,8 @@
         <script src="{{ asset('lib/parallax/parallax.min.js') }}"></script>
         <script src="{{ asset('lib/isotope/isotope.pkgd.min.js') }}"></script>
         <script src="{{ asset('lib/lightbox/js/lightbox.min.js') }}"></script>
-
+        
+        <script src="{{ asset('DataTables/datatables.js') }}"></script>
         <!-- Template Javascript -->
         <script src="{{ asset('js/main.js') }}"></script>
     </body>
