@@ -16,10 +16,10 @@ class Perfil extends Component
         $users = auth()->user()->id;
         
         $this->user = User::findOrFail($users);
-        /*dd($this->user);
-        $this->nombres = $this->user[0]->name;
-        $this->apellidos = $this->user[0]->apellidos;
-        $this->email = $this->user[0]->email;*/
+        //dd($this->user);
+        $this->nombres = $this->user->name;
+        $this->apellidos = $this->user->apellidos;
+        $this->email = $this->user->email;
         return view('livewire.login.perfil');
     }
     public function perfil(){

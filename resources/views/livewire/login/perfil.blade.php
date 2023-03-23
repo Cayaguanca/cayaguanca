@@ -1,5 +1,5 @@
 <div>
-        <div class="borde">
+        <div class="borde mb-5">
         <div id="main-wrapper">
             <div class="page-wrapper">
                 <div class="container-fluid">
@@ -13,7 +13,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="centrar">
-                                        <img src={{asset($user->file_path)}} alt="foto" class="img-circular">
+                                        <img alt="foto" class="img-circular" width="200" height="200" src={{asset($user->file_path)}}>
                                         
                                         <h4 class="card-title mt-2">{{ $user->name }}</h4>
                                         <h6 class="card-subtitle">{{ $user->role_id }}</h6>
@@ -31,25 +31,25 @@
                                                 <input wire:model="nombres" type="text" id="nombres" class="form-control" placeholder="Nombres">    
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group mt-3">
                                             <label class="col-md-12">Apellidos</label>
                                             <div class="col-md-12">
                                                 <input wire:model="apellidos" type="text" placeholder="Apellidos..." class="form-control form-control-line">
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group mt-3">
                                             <label for="example-email" class="col-md-12">Email</label>
                                             <div class="col-md-12">
                                                 <input wire:model="email" type="email" placeholder="email@email.com" disabled="true" class="form-control form-control-line" name="email" id="email">
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group mt-3">
                                             <label class="col-md-12">Foto de Perfil</label>
                                             <div class="col-md-12">
-                                                <input type="file" >
+                                                <input class="form-control" type="file" >
                                             </div>
                                         </div>
-                                            <div class="col-sm-12 borde" >
+                                            <div class="col-sm-12 borde mt-3" >
                                                 <button type="submit" class="btn btn-success">Actualizar Perfil</button>
                                             </div>
                                     </form>
