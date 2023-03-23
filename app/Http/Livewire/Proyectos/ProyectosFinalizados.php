@@ -9,30 +9,31 @@ use Livewire\Component;
 
 class ProyectosFinalizados extends Component
 {
-    public $proyectos = [], $municipios = [], $fotos = [];
+    public $proyectos = [], $municipios = [], $busqueda_nombre, $busqueda_municipios;
     public function render()
     {
-        $count = 0;
-        //$url = '';
-
-        $this->proyectos = Proyecto::with(['media_proyecto'])->get();
-        foreach($this->proyectos as $proyecto) {
-            foreach($proyecto->media_proyecto as $media) {
-                $count = 1;
-                //$url = str_replace('storage', 'public', $media->file_path);
-                array_push($this->fotos, $media->file_path);
-
-                if($count == 1)
-                    break;
-            }
-            $count = 0;
-            //$url = '';
-        }
-
-        //dd($this->fotos[$this->proyectos[0]->id - 1]);
-
+        $this->proyectos = Proyecto::with(['media_proyecto', 'municipios'])
+                            ->orderBy('fecha_final', 'desc')
+                            ->get();
         $this->municipios = Municipio::all();
-
+        dd($this->proyectos);
+        $this->getProyectosNombres();
+        if($this->busqueda_municipios)
+            $this->getProyectosMunicipios();
         return view('livewire.proyectos.proyectos-finalizados');
+    }
+
+    public function getProyectosNombres() {
+        $this->proyectos = Proyecto::where('nombre_proyecto','LIKE','%'.$this->busqueda_nombre.'%')
+                                    ->with(['media_proyecto'])
+                                    ->orderBy('fecha_final', 'desc')
+                                    ->get();
+    }
+
+    public function getProyectosMunicipios() {
+        $this->proyectos = Proyecto::with(['media_proyecto', 'municipios'])->whereHas('municipios', function($query) {
+            $query->where('municipios.id', $this->busqueda_municipios);
+        })->orderBy('fecha_final', 'desc')->get();
+        //dd($this->proyectos);
     }
 }

@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             DonanteSeeder::class,
-            SuscriptorSeeder::class
+            SuscriptorSeeder::class,
+            MunicipioSeeder::class
         ]);
     }
 }
