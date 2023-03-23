@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Livewire\Eventos\VerEvento;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,6 +29,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::view('/usuarios', 'usuarios.usuarios')->name('ListaUsuarios');
     Route::view('/suscriptores','suscriptores.suscriptores')->name('ListaSuscriptores');
     Route::view('/eventos','eventos.eventos')->name('ListaEventos');
+    Route::get('/eventos/ver/{id}', VerEvento::class)->name('VerEventos');
+    Route::view('/perfil','login.perfil')->name('Perfil');
 });
 
 Route::group(['middleware' => 'guest'], function () {
