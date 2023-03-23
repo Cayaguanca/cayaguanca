@@ -13,12 +13,10 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="centrar">
-                                        <!--<img v-if="u.foto != 'http://cayaguanca_backend.test/images/profiles'" :src="u.foto" alt="foto" class="img-circular">
-                                        <p v-if="u.foto == 'http://cayaguanca_backend.test/images/profiles'">Sin Foto</p>
-                                        -->
+                                        <img src={{asset($user->file_path)}} alt="foto" class="img-circular">
                                         
-                                        <h4 class="card-title mt-2">{{ $user[0]->name }}</h4>
-                                        <h6 class="card-subtitle">{{ $user[0]->role_id }}</h6>
+                                        <h4 class="card-title mt-2">{{ $user->name }}</h4>
+                                        <h6 class="card-subtitle">{{ $user->role_id }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -30,19 +28,19 @@
                                         <div class="form-group">
                                             <label class="col-md-12">Nombres</label>
                                             <div class="col-md-12">
-                                                <input type="text" id="nombres" class="form-control" placeholder="Nombres">    
+                                                <input wire:model="nombres" type="text" id="nombres" class="form-control" placeholder="Nombres">    
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-12">Apellidos</label>
                                             <div class="col-md-12">
-                                                <input type="text" placeholder="Apellidos..." class="form-control form-control-line">
+                                                <input wire:model="apellidos" type="text" placeholder="Apellidos..." class="form-control form-control-line">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="example-email" class="col-md-12">Email</label>
                                             <div class="col-md-12">
-                                                <input type="email" placeholder="email@email.com" disabled="true" class="form-control form-control-line" name="email" id="email">
+                                                <input wire:model="email" type="email" placeholder="email@email.com" disabled="true" class="form-control form-control-line" name="email" id="email">
                                             </div>
                                         </div>
                                         <div class="form-group">

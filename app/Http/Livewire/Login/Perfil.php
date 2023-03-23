@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Livewire\Login;
+
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 use Livewire\Component;
@@ -8,14 +10,16 @@ use Livewire\Component;
 class Perfil extends Component
 {
 
-    public $user;
+    public $user, $nombres, $apellidos, $email;
     public function render()
     {
-        $users = auth()->user()->email;
-
-        $this->user = DB::table('users')->where('email',$users)->get();
-
+        $users = auth()->user()->id;
         
+        $this->user = User::findOrFail($users);
+        /*dd($this->user);
+        $this->nombres = $this->user[0]->name;
+        $this->apellidos = $this->user[0]->apellidos;
+        $this->email = $this->user[0]->email;*/
         return view('livewire.login.perfil');
     }
     public function perfil(){
@@ -24,19 +28,7 @@ class Perfil extends Component
 
         $user = DB::table('users')->where('email',$users)->get();
 
-        $user[0]->foto = asset('/images/profiles/'.$user[0]->foto);
+        //$user[0]->foto = asset('/images/profiles/'.$user[0]->foto);
         
-        /*return response()->json([
-            'status' => true,
-            'message' => 'Acerca del perfil',
-            'user' => [
-                'id' => $user[0]->id,
-                'nombres' => $user[0]->nombres,
-                'apellidos' => $user[0]->apellidos,
-                'email' => $user[0]->email,
-                'foto' => $user[0]->foto,
-                'role_id' => $user[0]->role_id
-            ]
-        ], 200);*/
     }
 }
