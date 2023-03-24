@@ -9,7 +9,7 @@
         </div>
         <div class="row align-items-start my-3">
 
-            <table class="display table-bordered" id="municipios" style="width:100%">
+            <table class="table table-bordered" id="municipios" style="width:100%">
                 <thead>
                     <tr>
                         <th>N°</th>
