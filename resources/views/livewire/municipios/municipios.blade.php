@@ -4,7 +4,7 @@
         <h1>Municipios</h1>
         
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button type="button" data-bs-toggle="modal" data-bs-target="#editModal"
+            <button wire:click="limpiarCampo()" type="button" data-bs-toggle="modal" data-bs-target="#editModal"
             class="btn btn-primary me-2"> Registrar nuevo municipio </button>
         </div>
         <div class="row align-items-start my-3">
