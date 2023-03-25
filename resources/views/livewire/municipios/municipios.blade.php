@@ -4,12 +4,12 @@
         <h1>Municipios</h1>
         
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button type="button" data-bs-toggle="modal" data-bs-target="#editModal"
+            <button wire:click="limpiarCampo()" type="button" data-bs-toggle="modal" data-bs-target="#editModal"
             class="btn btn-primary me-2"> Registrar nuevo municipio </button>
         </div>
-        <div class="row align-items-start my-3">
+        <div class="row align-items-start my-3 table-responsive">
 
-            <table class="table table-bordered" id="municipios" style="width:100%">
+            <table class="table text-center" id="municipios" style="width:100%">
                 <thead>
                     <tr>
                         <th>N°</th>

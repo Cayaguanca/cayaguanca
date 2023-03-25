@@ -13,6 +13,7 @@ use Livewire\WithFileUploads;
 use Intervention\Image\ImageManagerStatic as Image; 
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 class Proyectos extends Component
 {
     use WithFileUploads;
@@ -36,7 +37,21 @@ class Proyectos extends Component
     public $file_name,$file_extension,$file_path,$proyectoImg_id,$files=[],$img;
 
 
-    
+    //variables para paginacion 
+    public $perPage = 10, $search,
+    $pagination = true;
+
+    protected $rules = [
+        'nombre_proyecto' => 'required',
+        'descripcion_proyecto' => 'required',
+        'fecha_inicio' => 'required',
+        'fecha_final' => 'required',
+        'direccion_proyecto' => 'required',
+        'fecha_actividad'=>'required',
+        'municipio_id' => 'required',
+        'donante_id' => 'required',
+        //'files' => 'mimes:pdf,jpg,jpeg,png',
+    ];
 
     
 
@@ -48,13 +63,25 @@ class Proyectos extends Component
     public function render()
     {
         $this->proyectos = Proyecto::all();
+        //$proyectos = Proyecto::paginate(4);
+        //.dd($proyectos);
+        /*$proyectos = Proyecto::query()
+            ->when($this->search, function($query){
+                $query->where('nombre_proyecto', 'like', "%{$this->search}%");
+            })->paginate($this->perPage);*/
+        //$this->proyectos = $proyectos;
         $this->municipios = Municipio::all();
         $this->donantes = Donante::all();
-
+        $this->find();
+        //return view('livewire.proyectos.proyectos', compact('proyectos'));
+        /*return view('livewire.proyectos.proyectos', [
+            'proyectos' => $proyectos,
+        ]);*/
         return view('livewire.proyectos.proyectos');
     }
 
     public function save(){
+        $this->validate();
         $id = $this->id_proyecto;
         $this->abrirModal();
         $new_proyecto = Proyecto::updateOrCreate(['id' => $id],[
@@ -80,6 +107,7 @@ class Proyectos extends Component
         $new_proyecto->donantes()->attach($this->atach_donante);
 
         $this->limpiar_campos();
+        $this->id_proyecto = '';
     }
 
     public function save_detalle_proyecto(){
@@ -161,6 +189,7 @@ class Proyectos extends Component
         $this->limpiar_campos();
         $this->id_proyecto = $id;
         $proyecto = Proyecto::where('id','=',$id)->with(['municipios'])->with(['detalle_proyectos'])->get();
+        //dd($proyecto[0]);
         $this->nombre_proyecto = $proyecto[0]->nombre_proyecto;
         $this->descripcion_proyecto = $proyecto[0]->descripcion_proyecto;
         $this->fecha_inicio = $proyecto[0]->fecha_inicio;
@@ -214,6 +243,28 @@ class Proyectos extends Component
     }
 
     public function delete_now(){
+        $this->delete_fotos();
         Proyecto::findOrFail($this->id_proyecto)->delete();
+    }
+
+    public function delete_fotos()
+    {
+        $programa = Proyecto::where('id','=',$this->id_proyecto)->with(['media_proyecto'])->get();
+        
+        //dd($programa[0]);
+        foreach($programa[0]->media_proyecto as $key => $foto){
+            $imagen = MediaProyecto::findOrFail($foto->id);
+            $url = str_replace('storage', 'public', $imagen->file_path);
+            Storage::delete($url);
+            $imagen->save();    
+        }
+        //$url = str_replace('storage', 'public', $file->file_path);
+        //Storage::delete($url);
+        //$file->save();
+    }
+
+    public function find(){
+        $this->proyectos = Proyecto::where('nombre_proyecto','LIKE','%'.$this->search.'%')->get();
+        //dd($this->proyectos);
     }
 }
