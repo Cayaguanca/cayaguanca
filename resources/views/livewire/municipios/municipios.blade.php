@@ -7,9 +7,9 @@
             <button wire:click="limpiarCampo()" type="button" data-bs-toggle="modal" data-bs-target="#editModal"
             class="btn btn-primary me-2"> Registrar nuevo municipio </button>
         </div>
-        <div class="row align-items-start my-3">
+        <div class="row align-items-start my-3 table-responsive">
 
-            <table class="table table-bordered" id="municipios" style="width:100%">
+            <table class="table text-center" id="municipios" style="width:100%">
                 <thead>
                     <tr>
                         <th>N°</th>
