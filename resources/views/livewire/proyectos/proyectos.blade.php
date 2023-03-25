@@ -2,12 +2,17 @@
     {{-- The Master doesn't talk, he acts. --}}
     <div class="container p-5">
         <h1>Programas</h1>
+        
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#registrarModal"> 
+            
+            <input wire:model="search" wire:keyup="find()" 
+            class="form-control float-left mx-auto " placeholder="Buscar programa" aria-label="Sizing example input" type="text" >
+            <button wire:click = "limpiar_campos()" type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#registrarModal"> 
                 Registrar nuevo programa </button>
         </div>
         <div class="row align-items-start my-3">
             <div class="table-responsive">
+                
                 <table class="table text-center">
                     <thead >
                         <tr>
@@ -53,6 +58,7 @@
                         @endforeach
                     </tbody>
                 </table>
+               
             </div>
         </div>
     </div>
@@ -72,22 +78,34 @@
                         
                         <label for="nombre_proyecto" class="form-label fw-bold">Nombres del proyecto</label>
                         <input wire:model="nombre_proyecto" type="text" class="form-control" id="nombre_municipio" >
+                        @error('nombre_proyecto')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
                     </div>
                     
                     <div class="form-group mb-3">
                         <label for="descripcion_proyecto" class="form-label fw-bold">Descripción del Programa</label>
                         <textarea wire:model="descripcion_proyecto" type="number" class="form-control" rows="4"
                         id="descripcion_proyecto"></textarea>
+                        @error('descripcion_proyecto')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
                     </div>
                     
                     <div class="form-group mb-3">
                         <label for="fecha_inicio" class="form-label fw-bold">Fecha de inicio</label>
                         <input wire:model="fecha_inicio" type="date" class="form-control" id="fecha_inicio">
+                        @error('fecha_inicio')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
                     </div>
 
                     <div class="form-group mb-3">
                         <label for="fecha_final" class="form-label fw-bold">Fecha de finalizacion</label>
                         <input wire:model="fecha_final" type="date" class="form-control" id="fecha_final">
+                        @error('fecha_final')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
                     </div>
                     <!--Apartado para agregar detalle de programa-->
                     <div class="grupo-modal container">
@@ -97,11 +115,17 @@
                                 <div class="col-sm mb-3" >
                                     <label for="direccion_proyecto" class="form-label fw-bold">Dirección</label>
                                     <input wire:model="direccion_proyecto" type="text" class="form-control" id="direccion_proyecto">
+                                    @error('direccion_proyecto')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-sm mb-3" >
                                 <label for="fecha_actividad" class="form-label fw-bold">fecha de actividad</label>
                                 <input wire:model="fecha_actividad" type="date" class="form-control" id="fecha_actividad">
+                                @error('fecha_actividad')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                             <div class="col-sm mb-3" >
                                 <label for="municipio" class="form-label fw-bold">Selecione el municipio</label>
@@ -115,6 +139,9 @@
                                     </option>
                                     @endforeach
                                 </select>
+                                @error('municipio_id')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                             <div class="row mb-3">
                                 <div class="col-8">
@@ -145,7 +172,7 @@
                             <label class="form-label fw-bold">Donantes</label>
                             <div class="col-sm mb-3" >
                                 <label for="donantes" class="form-label fw-bold">Seleccione un donante</label>
-                                <select wire:model="donante_id" id="donantesid" class="form-control">
+                                <select wire:model="donante_id" id="donante_id" class="form-control">
                                     <option value="">
                                         --seleccione un donante--
                                     </option>
@@ -155,6 +182,9 @@
                                     </option>
                                     @endforeach
                                 </select>
+                                @error('donante_id')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                             <div class="row mb-3" >
                                 
