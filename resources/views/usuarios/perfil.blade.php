@@ -4,5 +4,5 @@
             {{ __('Perfil') }}
         </h2>
     </x-slot>
-    @livewire('login.perfil')
+    @livewire('usuarios.perfil')
 </x-app-layout>

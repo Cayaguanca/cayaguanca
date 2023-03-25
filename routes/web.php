@@ -30,7 +30,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::view('/suscriptores','suscriptores.suscriptores')->name('ListaSuscriptores');
     Route::view('/eventos','eventos.eventos')->name('ListaEventos');
     Route::get('/eventos/ver/{id}', VerEvento::class)->name('VerEventos');
-    Route::view('/perfil','login.perfil')->name('Perfil');
+    Route::view('/perfil','usuarios.perfil')->name('Perfil');
     Route::view('/acercadenosotros','nosotros.acerca')->name('AcercaDeNosotros');
 });
 

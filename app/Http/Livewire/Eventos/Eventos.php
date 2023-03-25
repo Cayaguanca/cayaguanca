@@ -9,6 +9,7 @@ use App\Models\Donante;
 use App\Models\MediaEvento;
 use App\Models\Municipio;
 use App\Models\Evento;
+use Composer\EventDispatcher\Event;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManagerStatic as Image; 
 
@@ -37,6 +38,7 @@ class Eventos extends Component
 
     protected $listeners=[
         'actualizar' => 'render',
+        'eliminar' => 'delete_now'//recibir la confirmación de la alerta para eliminar
     ];
 
     public function mount(){
@@ -64,7 +66,7 @@ class Eventos extends Component
             
             $file_save->file_name = $file->getClientOriginalName();
             $file_save->file_extension = $file->extension();
-            $file_save->file_path = 'storage/' . $file->store('file', 'public')->resize(200,200);
+            $file_save->file_path = 'storage/' . $file->store('file', 'public');
             $file_save->evento_id = $new_evento->id;
 
             $file_save->save();
@@ -74,13 +76,10 @@ class Eventos extends Component
         $new_evento->donantes()->attach($this->atach_donante);
 
         $this->limpiar_campos();
+        //Enviar alerta de evento actualizado correctamente
+        $this->dispatchBrowserEvent('swal:modal',[
+        ]);
         
-    }
-
-    public function resizeImage($image) { 
-        $this->img = Image::make($image);
-        $this->img->resize(200, 200); 
-        $this->img->save(); 
     }
 
     public function save_detalle_evento(){
@@ -196,8 +195,19 @@ class Eventos extends Component
 
     public function delete($id){
         $this->id_evento = $id;
+
+        $this->dispatchBrowserEvent('swal:confirmarDelete',[
+        ]);    
     }
 
-
+    public function delete_now(){
+        $evento = Evento::where('id','=',$this->id_evento)->with(['detalle_eventos'])->get();
+        $detalle = $evento[0]->detalle_eventos;
+        Evento::findOrFail($this->id_evento)->delete();
+        foreach($detalle as $detalleEvento){
+            DetalleEvento::findOrFail($detalleEvento->id)->delete();
+        }
+            
+    }
 
 }
