@@ -13,7 +13,10 @@ class Welcome extends Component
     public function render()
     {
         $this->proyectos = Proyecto::with('media_proyecto')->take(6)->get();
-        $this->eventos = Evento::take(6)->get();
+        $this->eventos = Evento::with('media_eventos')->take(6)->get();
+
+        //dd($this->eventos[0]->media_eventos);
+        //dd(count($this->proyectos[0]->media_proyecto) != 0);
 
         return view('livewire.index.welcome');
     }
