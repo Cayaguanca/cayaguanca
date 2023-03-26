@@ -16,7 +16,7 @@ class ProyectosFinalizados extends Component
                             ->orderBy('fecha_final', 'desc')
                             ->get();
         $this->municipios = Municipio::all();
-        dd($this->proyectos);
+        //dd($this->proyectos);
         $this->getProyectosNombres();
         if($this->busqueda_municipios)
             $this->getProyectosMunicipios();
