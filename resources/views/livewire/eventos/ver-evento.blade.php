@@ -6,14 +6,20 @@
             <div class="col">
                 <div class="bordeCuadroIzquierdo">
                     <div class="contenedor_img">
+                    @if(count($media) >= 1)
                         <div class="img_principal img-fluid">
                             <img class="actual_img" alt="foto" src={{asset($media[0]->file_path)}}>
                         </div>
-                        <div class="contenedor_opciones_img">
+                        <div class="contenedor_opciones_img"> 
                             @foreach ($media as $m)
                             <img class="opcion_img" alt="foto" width="400" height="400" src={{asset($m->file_path)}}>
                             @endforeach
                         </div>
+                    @else
+                        <div class="img_principal img-fluid">
+                            No se han registrado imagenes aún
+                        </div>
+                    @endif
                     </div>
                 </div>
             </div>
@@ -86,7 +92,7 @@
     justify-content: center; 
 }
 .contenedor_img{
-    padding-top: 10px;
+    padding-bottom: 20px;
 }
 .img_principal {
     padding-top: 50px;
@@ -112,7 +118,8 @@
     margin-left: 50px;
     margin-right: 50px;
     justify-content: space-between;
-    overflow-y: auto; 
+    overflow-y: auto;
+    
 
 }
 .opcion_img {

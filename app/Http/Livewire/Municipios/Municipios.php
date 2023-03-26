@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Municipios;
 use App\Models\Municipio;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 class Municipios extends Component
 {
     use WithFileUploads;
@@ -12,7 +13,7 @@ class Municipios extends Component
     public $municipios;
     public $municipio_id,$nombre_municipio,$codigo_postal,$escudo
     ,$fecha_afiliacion,$descripcion_municipio;
-    public $file_name,$file_extension,$file_path;
+    public $file_name,$file_extension,$file_path,$foto_direccion,$identificador;
     public $modal = false;
 
     protected $rules = [
@@ -25,6 +26,7 @@ class Municipios extends Component
 
     public function mount(){
         //$this->middleware('guest');
+        $this->identificador = rand();
     }
 
     public function render()
@@ -46,6 +48,8 @@ class Municipios extends Component
                 'descripcion_municipio' => $this->descripcion_municipio
             ]);    
         }else{
+            $url = str_replace('storage', 'public', $this->foto_direccion);
+            Storage::delete($url);
             $newMunicipio = Municipio::updateOrCreate(['id'=>$id],[
                 'nombre_municipio' => $this->nombre_municipio,
                 'codigo_postal' => $this->codigo_postal,
@@ -82,10 +86,13 @@ class Municipios extends Component
         $this->municipio_id = $municipioEdit->id;
         $this->nombre_municipio = $municipioEdit->nombre_municipio;
         $this->codigo_postal = $municipioEdit->codigo_postal;
+        $this->foto_direccion = $municipioEdit->file_path;
+        //dd($this->escudo);
         $this->fecha_afiliacion = $municipioEdit->fecha_afiliacion;
         $this->descripcion_municipio = $municipioEdit->descripcion_municipio;
         
         $this->abrirModal();
+        $this->identificador = rand();
     }
 
     public function delete($id){
@@ -94,6 +101,6 @@ class Municipios extends Component
     public function delete_now(){
         Municipio::find($this->municipio_id)->delete();
     }
-
+    
 
 }

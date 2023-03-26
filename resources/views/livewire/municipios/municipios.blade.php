@@ -100,7 +100,7 @@
                     <div class="form-group mb-3">
 
                         <label for="escudo" class="form-label fw-bold">Escudo</label>
-                        <input wire:model="escudo" type="file" accept="image/png,image/jpg,image/jpeg,image/svg" id="foto" class="form-control">
+                        <input wire:model="escudo" type="file" accept="image/png,image/jpg,image/jpeg,image/svg" id="{{$identificador}}" class="form-control">
                         @error('escudo')
                             <span class="text-danger">{{$message}}</span>
                         @enderror

@@ -11,17 +11,19 @@ use App\Models\Municipio;
 use App\Models\Evento;
 use Composer\EventDispatcher\Event;
 use Illuminate\Support\Facades\DB;
-use Intervention\Image\ImageManagerStatic as Image; 
+use Intervention\Image\ImageManagerStatic as Image;
+use Livewire\WithPagination;
 
 class Eventos extends Component
 {
     use WithFileUploads;
+    use WithPagination;
     
     //valiables
     public $modal=false;
     public $detallesAdd=[], $donanteAdd=[], $municipiosAdd=[];
     //variables de tabla evento
-    public $eventos, $id_evento, $nombre_evento, $descripcion_evento;
+    public  $id_evento, $nombre_evento, $descripcion_evento;
 
     //variables de tabla detalle de evento
     public $id_detalle_evento, $direccion_evento, $fecha_evento, $atach_detalle=[];
@@ -47,11 +49,13 @@ class Eventos extends Component
     }
     public function render()
     {   
-        $this->eventos = Evento::all();
+        //$this->eventos = Evento::orderBy('created_at','desc')->get();
         $this->municipios = Municipio::all();
         $this->donantes = Donante::all();
 
-        return view('livewire.eventos.eventos');
+        return view('livewire.eventos.eventos',[
+            'eventos'=>Evento::orderBy('created_at','desc')->paginate(2),
+        ]);
     }
 
     public function save(){
