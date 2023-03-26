@@ -24,7 +24,9 @@
                         <div class="card mb-3">
                             <div class="row no-gutters">
                                 <div class="col-md-4 d-flex align-items-center">
-                                    <img class="card-img ms-3" src={{ asset($proyecto->media_proyecto[0]->file_path) }} alt="imagen">
+                                    @if (count($proyecto->media_proyecto) != 0)
+                                        <img class="card-img ms-3" src={{ asset($proyecto->media_proyecto[0]->file_path) }} alt="imagen">
+                                    @endif
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">

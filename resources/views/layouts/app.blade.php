@@ -78,7 +78,7 @@
 
         <!-- Navbar Start -->
         <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
-            <a href="/" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <a href="{{ route('index') }}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
                 <img src="{{ asset('img/cayaguanca.png') }}" alt="..." height="90">
                 <h1 class="m-0">Cayaguanca</h1>
             </a>
@@ -91,18 +91,22 @@
                     <a href="" class="nav-item nav-link active">Inicio</a>
                     <a href="" class="nav-item nav-link">Contáctanos</a>
                     <a href="" class="nav-item nav-link">Sobre Nosotros</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Administración</a>
-                        <div class="dropdown-menu bg-light m-0">
-                            <a href="{{ route('ListaUsuarios') }}" class="dropdown-item">Usuarios</a>
-                            <a href="" class="dropdown-item">Proyectos</a>
-                            <a href="" class="dropdown-item">Eventos</a>
-                            <a href="{{ route('ListaDonantes') }}" class="dropdown-item">Donantes</a>
-                            <a href="" class="dropdown-item">Municipios</a>
-                            <a href="" class="dropdown-item">Suscriptores</a>
-                            <a href="" class="dropdown-item">Galería</a>
-                        </div>
-                    </div>
+                    @if (Route::has('login'))
+                        @auth
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Administración</a>
+                                <div class="dropdown-menu bg-light m-0">
+                                    <a href="{{ route('ListaUsuarios') }}" class="dropdown-item">Usuarios</a>
+                                    <a href="{{ route('ListaProyectos') }}" class="dropdown-item">Proyectos</a>
+                                    <a href="{{ route('ListaEventos') }}" class="dropdown-item">Eventos</a>
+                                    <a href="{{ route('ListaDonantes') }}" class="dropdown-item">Donantes</a>
+                                    <a href="{{ route('ListaMunicipios') }}" class="dropdown-item">Municipios</a>
+                                    <a href="{{ route('ListaSuscriptores') }}" class="dropdown-item">Suscriptores</a>
+                                    <a href="{{ route('ListaGaleria') }}" class="dropdown-item">Galería</a>
+                                </div>
+                            </div>
+                        @endauth
+                    @endif
                 </div>
                 <a href="" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block">Proyectos<i
                         class="fa fa-arrow-right ms-3"></i></a>
