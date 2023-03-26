@@ -28,7 +28,8 @@ class VerEvento extends Component
             $ids += 1;
         }
         $this->media = MediaEvento::where('evento_id',$id)->get();
-
+        
+        //dd($this->media);
     }
     public function render()
     {

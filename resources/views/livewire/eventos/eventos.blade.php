@@ -3,10 +3,16 @@
     <div class="container p-5">
 
         <h1>Eventos</h1>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-            <button wire:click="limpiar_campos()" type="button" data-bs-toggle="modal" data-bs-target="#registrarModal" class="btn btn-primary me-2"> Registrar nuevo evento </button>
+        
+        <div class="d-flex bd-highlight">
+            <div class="me-auto p-2 bd-highlight">
+                <input class="form-control float-left mx-auto " placeholder="Buscar Evento" aria-label="Sizing example input" type="text" >
+            </div>
+            <div class="p-2 bd-highlight">
+                <button wire:click="limpiar_campos()" type="button" data-bs-toggle="modal" data-bs-target="#registrarModal" class="btn btn-primary me-2"> Registrar nuevo evento </button>
+            </div>
         </div>
-
+        
         <div class="row align-items-start">
             <!-- Tabla eventos  -->
             <div class="row align-items-start my-3">
@@ -14,7 +20,7 @@
                     <thead >
                         <tr>
                             <th scope="col">id</th>
-                            <th scope="col">Nombre del programa</th>
+                            <th scope="col">Nombre del Evento</th>
                             <th scope="col">Descripción</th>
                             <th scope="col">Acciones</th>
                         </tr>
@@ -51,8 +57,13 @@
                         @endforeach
                     </tbody>
                 </table>
+                @if (count($eventos))
+                    {{$eventos->links('pagination')}}
+                @endif
+                
             </div>
         </div>
+        
 
         <!--Modal registrar -->
         <div wire:ignore.self class="modal fade" id="registrarModal" tabindex="-1" aria-labelledby="registrarModalLabel" aria-hidden="true">
@@ -168,25 +179,7 @@
             </div>
         </div>
 
-        <!--Eliminar Modal-->
-        <div wire:ignore.self class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar evento</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>¿Está seguro/a que desea eliminar el evento?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button wire:click.prevent="delete_now()" data-bs-toggle="modal" data-bs-target="#deleteModal" type="button" class="btn btn-danger">Confirmar</button>
-                    </div>
-                </div>
-            </div>
-        
-        </div>
+
     </div>
      <!--SweetAlert-->
     @push('modals')
@@ -198,7 +191,8 @@
                 Swal.fire({
                     icon: 'success',
                     title: 'Evento guardado con extio',
-                    showConfirmButton: true,
+                    showConfirmButton: false,
+                    timer: 1000,
                 })
             });
         </script>
