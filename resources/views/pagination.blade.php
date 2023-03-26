@@ -3,9 +3,9 @@
     <ul class="pagination pagination-rounded justify-content-center mt-4">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
-            <li class="page-item disabled"><a href="javascript:;" wire:click="previousPage" class="page-link">Prev</a></li>
+            <li class="page-item disabled"><a href="javascript:;" wire:click="previousPage" class="page-link">Anterior</a></li>
         @else
-        <li class="page-item"><a href="javascript:;" wire:click="previousPage" rel="prev" class="page-link">Prev</a></li>
+        <li class="page-item"><a href="javascript:;" wire:click="previousPage" rel="prev" class="page-link">Anterior</a></li>
         @endif
 
         {{-- Pagination Element Here --}}
@@ -29,9 +29,9 @@
 
         {{-- Next Page Link --}}
         @if ($paginator->hasMorePages())
-            <li class="page-item"><a href="javascript:;" wire:click="nextPage" class="page-link">Next</a></li>
+            <li class="page-item"><a href="javascript:;" wire:click="nextPage" class="page-link">Siguiente</a></li>
         @else
-          <li class="page-item disabled"><a href="javascript:;" class="page-link">Next</a></li>
+          <li class="page-item disabled"><a href="javascript:;" class="page-link">Siguiente</a></li>
         @endif
     </ul>
 @endif

@@ -68,7 +68,8 @@ class Perfil extends Component
         
         $usu->save();
 
-        $this->dispatchBrowserEvent('swal:modal',[
+        $this->dispatchBrowserEvent('swal:confirmacion',[
+            'title' => 'Usuario Actualizado',
         ]);
     }
 }

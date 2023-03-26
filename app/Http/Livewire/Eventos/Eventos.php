@@ -54,7 +54,7 @@ class Eventos extends Component
         $this->donantes = Donante::all();
 
         return view('livewire.eventos.eventos',[
-            'eventos'=>Evento::orderBy('created_at','desc')->paginate(2),
+            'eventos'=>Evento::orderBy('created_at','desc')->paginate(5),
         ]);
     }
 
@@ -81,7 +81,8 @@ class Eventos extends Component
 
         $this->limpiar_campos();
         //Enviar alerta de evento actualizado correctamente
-        $this->dispatchBrowserEvent('swal:modal',[
+        $this->dispatchBrowserEvent('swal:confirmacion',[
+            'title' => 'Evento Guardado con exito'
         ]);
         
     }
@@ -201,6 +202,7 @@ class Eventos extends Component
         $this->id_evento = $id;
 
         $this->dispatchBrowserEvent('swal:confirmarDelete',[
+            'title' => '¿Seguro que desea eliminar el evento?',
         ]);    
     }
 
