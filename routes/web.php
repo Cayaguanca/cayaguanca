@@ -13,9 +13,9 @@ use App\Http\Livewire\Eventos\VerEvento;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
@@ -30,11 +30,12 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::view('/suscriptores','suscriptores.suscriptores')->name('ListaSuscriptores');
     Route::view('/eventos','eventos.eventos')->name('ListaEventos');
     Route::get('/eventos/ver/{id}', VerEvento::class)->name('VerEventos');
-    Route::view('/perfil','login.perfil')->name('Perfil');
+    Route::view('/perfil','usuarios.perfil')->name('Perfil');
     Route::view('/acercadenosotros','nosotros.acerca')->name('AcercaDeNosotros');
 });
 
 Route::group(['middleware' => 'guest'], function () {
+    Route::view('/', 'index.welcome')->name('index');
     Route::view('/galerias', 'galerias.galerias')->name('ListaGaleria');
     Route::view('/proyectos_finalizados', 'proyectos.proyectos-finalizados')->name('ListaProyTerminados');
 });

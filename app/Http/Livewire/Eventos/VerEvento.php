@@ -3,12 +3,13 @@
 namespace App\Http\Livewire\Eventos;
 
 use App\Models\Evento;
+use App\Models\MediaEvento;
 use Livewire\Component;
 
 class VerEvento extends Component
 {
 
-    public $evento, $detalle_evento, $municipio_evento, $detallesAdd=[];
+    public $media, $evento, $detalle_evento, $municipio_evento, $detallesAdd=[];
 
     public function mount($id)
     {
@@ -26,6 +27,9 @@ class VerEvento extends Component
             ));
             $ids += 1;
         }
+        $this->media = MediaEvento::where('evento_id',$id)->get();
+        
+        //dd($this->media);
     }
     public function render()
     {

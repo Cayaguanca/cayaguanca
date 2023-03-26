@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link href="{{ asset ('DataTables/datatables.css') }}">
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>Cayaguanca</title>
 
         <!-- Favicon -->
         <link href="{{ asset('img/favicon.ico') }}" rel="icon">
