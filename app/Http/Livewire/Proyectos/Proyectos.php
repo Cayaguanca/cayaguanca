@@ -63,8 +63,9 @@ class Proyectos extends Component
     public function render()
     {
         $this->proyectos = Proyecto::all();
+        //$this->proyectos = Proyecto::orderBy('fecha_inicio', 'desc')->get();
         //$proyectos = Proyecto::paginate(4);
-        //.dd($proyectos);
+        //dd($this->proyectos);
         /*$proyectos = Proyecto::query()
             ->when($this->search, function($query){
                 $query->where('nombre_proyecto', 'like', "%{$this->search}%");

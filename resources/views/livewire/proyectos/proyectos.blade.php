@@ -3,13 +3,19 @@
     <div class="container p-5">
         <h1>Programas</h1>
         
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            
-            <input wire:model="search" wire:keyup="find()" 
+        <div class="d-flex bd-highlight mb-3">
+            <div class="me-auto p-2 bd-highlight">
+                <input wire:model="search" wire:keyup="find()" 
             class="form-control float-left mx-auto " placeholder="Buscar programa" aria-label="Sizing example input" type="text" >
-            <button wire:click = "limpiar_campos()" type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#registrarModal"> 
-                Registrar nuevo programa </button>
+            </div>
+            
+            <div class="p-2 bd-highlight">
+                <button wire:click = "limpiar_campos()" type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#registrarModal"> 
+                    Registrar nuevo programa
+                </button>
+            </div>
         </div>
+
         <div class="row align-items-start my-3">
             <div class="table-responsive">
                 
@@ -58,7 +64,9 @@
                         @endforeach
                     </tbody>
                 </table>
-               
+
+                
+                
             </div>
         </div>
     </div>
