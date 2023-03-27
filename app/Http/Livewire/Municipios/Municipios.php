@@ -16,6 +16,10 @@ class Municipios extends Component
     public $file_name,$file_extension,$file_path,$foto_direccion,$identificador;
     public $modal = false;
 
+    protected $listeners=[
+        'eliminar' => 'delete_now'//recibir la confirmación de la alerta para eliminar
+    ];
+
     protected $rules = [
         'nombre_municipio' => 'required',
         'codigo_postal' => 'required',
@@ -62,7 +66,10 @@ class Municipios extends Component
         }
         $newMunicipio->save();
         $this->limpiarCampo();
-        return session()->flash("success", "This is success message");
+        $this->dispatchBrowserEvent('swal:confirmacion',[
+            'title' => 'Municipio Guardado con exito'
+        ]);
+        //return session()->flash("success", "This is success message");
     }
     public function abrirModal()
     {
@@ -97,6 +104,9 @@ class Municipios extends Component
 
     public function delete($id){
         $this->municipio_id=$id;
+        $this->dispatchBrowserEvent('swal:confirmarDelete',[
+            'title' => '¿Seguro que desea eliminar el municipio?',
+        ]);    
     }
     public function delete_now(){
         Municipio::find($this->municipio_id)->delete();

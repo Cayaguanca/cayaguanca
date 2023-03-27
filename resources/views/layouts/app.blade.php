@@ -209,7 +209,38 @@
         @stack('modals')
         @livewireScripts
         
-        
+        <script src="sweetalert2.all.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            //Alert cofnirmacion guardar con exito
+            window.addEventListener('swal:confirmacion', event =>{
+                Swal.fire({
+                    icon: 'success',
+                    title: event.detail.title,
+                    showConfirmButton: false,
+                    timer: 1000,
+                })
+            });
+        </script>
+        <script>
+            //Alerta confirmar eliminar evento
+            window.addEventListener('swal:confirmarDelete', event =>{
+                Swal.fire({
+                    title: event.detail.title,
+                    text: "¡No podrás revertir esto!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonText: 'Si, Quiero eliminarlo'
+                    }).then((result) => {
+                    if (result.isConfirmed) {//si confirma borrar evento
+                        Livewire.emit('eliminar')
+                    }
+                })
+            });
+        </script>
 
     </body>
 </html>

@@ -182,40 +182,7 @@
 
     </div>
      <!--SweetAlert-->
-    @push('modals')
-        <script src="sweetalert2.all.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script>
-            //Alert cofnirmacion guardar con exito
-            window.addEventListener('swal:modal', event =>{
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Evento guardado con extio',
-                    showConfirmButton: false,
-                    timer: 1000,
-                })
-            });
-        </script>
-        <script>
-            //Alerta confirmar eliminar evento
-            window.addEventListener('swal:confirmarDelete', event =>{
-                Swal.fire({
-                    title: '¿Esta seguro que desea eliminar el evento?',
-                    text: "¡No podrás revertir esto!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    cancelButtonText: 'Cancelar',
-                    confirmButtonText: 'Si, Quiero eliminarlo'
-                    }).then((result) => {
-                    if (result.isConfirmed) {//si confirma borrar evento
-                        Livewire.emit('eliminar')
-                    }
-                })
-            });
-        </script>
-    @endpush
+    
 </div>
 <style>
     .table{
