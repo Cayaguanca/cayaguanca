@@ -7,7 +7,7 @@
             </div>
         </div>
         <!-- Tabla donantes  -->
-        <table class="display table-bordered table table-striped" style="width:100%">
+        <table class="table text-center" style="width:100%">
             <thead>
                 <tr>
                     <th>N°</th>
@@ -40,12 +40,14 @@
                         </td>
                     </tr>
                 @endforeach
+
             </tbody>
         </table>
+        {{ $donantes->links('pagination') }}
     </div>
 
     <!-- Modal Registrar -->
-    <div wire:ignore.self data-bs-backdrop="static" class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="newModalLabel" aria-hidden="true">
+    <div wire:ignore.self data-bs-backdrop="static" wire:keydown.escape="limpiarCampos()" class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="newModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-dark">
@@ -54,16 +56,18 @@
                     @elseif ($edit)
                         <h1 class="modal-title fs-5" style="color: #fff" id="exampleModalLabel">Editar Donante</h1>
                     @endif
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button wire:click="limpiarCampos()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group mb-3">
                         <label for="nombre" class="form-label fw-bold">Nombre</label>
                         <input wire:model="nombre" type="text" id="nombre" class="form-control" placeholder="Nombre del donante">
+                        @error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group mb-3">
                         <label for="logo" class="form-label fw-bold">Logo del donante</label>
                         <input wire:model="logo" type="file" accept="image/*" id="{{$identificador}}" class="form-control">
+                        @error('logo') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -96,4 +100,40 @@
             </div>
         </div>
     </div>
+
+    <!--SweetAlert-->
+    @push('modals')
+        <script src="sweetalert2.all.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            //Alert cofnirmacion guardar con exito
+            window.addEventListener('swal:modal', event =>{
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Donante guardado con extio',
+                    showConfirmButton: false,
+                    timer: 1000,
+                })
+            });
+        </script>
+        <script>
+            //Alerta confirmar eliminar evento
+            window.addEventListener('swal:delete', event =>{
+                Swal.fire({
+                    title: 'Donante eliminado correctamente',
+                    icon: 'warning',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+            });
+        </script>
+    @endpush
 </div>
+
+<style>
+    .table{
+        background-color: #FFFFFF;
+        border-radius: 10% 10% 0% 0%;
+        border-collapse: collapse;
+    }
+</style>

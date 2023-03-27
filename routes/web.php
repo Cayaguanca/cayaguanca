@@ -36,10 +36,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('proyectos/ver/{id}', VerProyecto::class)->name('VerProyecto');
     Route::view('/perfil','usuarios.perfil')->name('Perfil');
     Route::view('/acercadenosotros','nosotros.acerca')->name('AcercaDeNosotros');
+    Route::view('/proyectos_finalizados', 'proyectos.proyectos-finalizados')->name('ListaProyTerminados');
 });
 
 Route::group(['middleware' => 'guest'], function () {
     Route::view('/', 'index.welcome')->name('index');
-    Route::view('/galerias', 'galerias.galerias')->name('ListaGaleria');
-    Route::view('/proyectos_finalizados', 'proyectos.proyectos-finalizados')->name('ListaProyTerminados');
 });
