@@ -14,15 +14,16 @@ use Intervention\Image\ImageManagerStatic as Image;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Livewire\WithPagination;
 class Proyectos extends Component
 {
     use WithFileUploads;
-    
+    use WithPagination;
     //valiables
     public $modal=false;
     public $detallesAdd=[],$donanteAdd=[],$municipiosAdd=[],$identificador_detalle, $identificador;
     //variables de tabla proyectos
-    public $proyectos, $id_proyecto, $nombre_proyecto, $descripcion_proyecto, $fecha_inicio,$fecha_final;
+    public  $id_proyecto, $nombre_proyecto, $descripcion_proyecto, $fecha_inicio,$fecha_final;
 
     //variables de tabla detalle_proyecto
     public $id_detalle_proyecto,$direccion_proyecto,$fecha_actividad, $atach_detalle=[];
@@ -38,22 +39,25 @@ class Proyectos extends Component
 
 
     //variables para paginacion 
-    public $perPage = 10, $search,
-    $pagination = true;
+    public $perPage = 10, $search='';
+    //$pagination = true;
 
     protected $rules = [
         'nombre_proyecto' => 'required',
         'descripcion_proyecto' => 'required',
         'fecha_inicio' => 'required',
         'fecha_final' => 'required',
-        'direccion_proyecto' => 'required',
-        'fecha_actividad'=>'required',
-        'municipio_id' => 'required',
-        'donante_id' => 'required',
+        //'direccion_proyecto' => 'required',
+        //'fecha_actividad'=>'required',
+        //'municipio_id' => 'required',
+        //'donante_id' => 'required',
         //'files' => 'mimes:pdf,jpg,jpeg,png',
     ];
 
     
+    protected $listeners=[
+        'eliminar' => 'delete_now'//recibir la confirmación de la alerta para eliminar
+    ];
 
     public function mount(){
         $this->identificador_detalle=rand();
@@ -62,23 +66,14 @@ class Proyectos extends Component
     }
     public function render()
     {
-        $this->proyectos = Proyecto::all();
-        //$this->proyectos = Proyecto::orderBy('fecha_inicio', 'desc')->get();
-        //$proyectos = Proyecto::paginate(4);
-        //dd($this->proyectos);
-        /*$proyectos = Proyecto::query()
-            ->when($this->search, function($query){
-                $query->where('nombre_proyecto', 'like', "%{$this->search}%");
-            })->paginate($this->perPage);*/
-        //$this->proyectos = $proyectos;
+        
         $this->municipios = Municipio::all();
         $this->donantes = Donante::all();
-        $this->find();
-        //return view('livewire.proyectos.proyectos', compact('proyectos'));
-        /*return view('livewire.proyectos.proyectos', [
-            'proyectos' => $proyectos,
-        ]);*/
-        return view('livewire.proyectos.proyectos');
+        
+        
+        return view('livewire.proyectos.proyectos',[
+            'proyectos' => Proyecto::orderBy('created_at','desc')->where('nombre_proyecto','LIKE','%'.$this->search.'%')->paginate(5),
+        ]);
     }
 
     public function save(){
@@ -109,6 +104,9 @@ class Proyectos extends Component
 
         $this->limpiar_campos();
         $this->id_proyecto = '';
+        $this->dispatchBrowserEvent('swal:confirmacion',[
+            'title' => 'Programa Guardado con exito'
+        ]);
     }
 
     public function save_detalle_proyecto(){
@@ -232,7 +230,7 @@ class Proyectos extends Component
     }
     public function delete_donante_proyecto($id,$donante){
         $key = array_search($id,array_column($this->donanteAdd,'id'));
-        //dd($key);
+        
         //Eliminar relacion buscar funcion 
         DB::table('donante_proyecto')->where('id','=',$donante)->delete();
 
@@ -241,6 +239,9 @@ class Proyectos extends Component
 
     public function delete($id){
         $this->id_proyecto = $id;
+        $this->dispatchBrowserEvent('swal:confirmarDelete',[
+            'title' => '¿Seguro que desea eliminar el programa?',
+        ]); 
     }
 
     public function delete_now(){
@@ -252,20 +253,12 @@ class Proyectos extends Component
     {
         $programa = Proyecto::where('id','=',$this->id_proyecto)->with(['media_proyecto'])->get();
         
-        //dd($programa[0]);
+        
         foreach($programa[0]->media_proyecto as $key => $foto){
             $imagen = MediaProyecto::findOrFail($foto->id);
             $url = str_replace('storage', 'public', $imagen->file_path);
             Storage::delete($url);
             $imagen->save();    
         }
-        //$url = str_replace('storage', 'public', $file->file_path);
-        //Storage::delete($url);
-        //$file->save();
-    }
-
-    public function find(){
-        $this->proyectos = Proyecto::where('nombre_proyecto','LIKE','%'.$this->search.'%')->get();
-        //dd($this->proyectos);
     }
 }
