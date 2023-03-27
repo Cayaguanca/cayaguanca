@@ -1,10 +1,9 @@
 <div>
-   
     <div class="container p-5">
         <h1>Suscritores Newsletter</h1>
         <div class="row align-items-start">
             <!-- Tabla suscritores  -->
-            <table class="hover" id="suscriptores" style="width:100%">
+            <table class="table text-center" id="table" style="width:100%">
                 <thead>
                     <tr>
                         <th>N°</th>
@@ -21,31 +20,16 @@
                         </tr>
                     @endforeach
                 </tbody>
-          </table>
+            </table>
+            {{ $suscriptores->links('pagination') }}
         </div>
     </div>
 </div>
 
-<script>
-    $(document).ready(function() {
-        $('#suscriptores').DataTable({
-            order: [
-                [0, 'asc']
-            ],
-            "language": {
-                "lengthMenu": "Mostrar _MENU_",
-                "zeroRecords": "No se encuentran datos relacionados ",
-                "info": "Mostrando página _PAGE_ de _PAGES_",
-                "infoEmpty": "No hay registros disponibles ",
-                "infoFiltered": "(filtrado de _MAX_ registros totales)",
-                'search':'Buscar',
-                'paginate': {
-                    'first':      'Primero',
-                    'last':       'Ultimo',
-                    'next':      'Siguiente',
-                    'previous':  'Anterior',
-                },
-            },
-        });
-    });
-</script>
+<style>
+    .table{
+        background-color: #FFFFFF;
+        border-radius: 10% 10% 0% 0%;
+        border-collapse: collapse;
+    }
+</style>

@@ -21,7 +21,7 @@ class Perfil extends Component
     {
         $users = auth()->user()->id;
         $this->usuario = User::findOrFail($users);
-        $this->role = Role::findOrFail($this->usuario->id);
+        $this->role = Role::findOrFail($this->usuario->role_id);
         return view('livewire.usuarios.perfil');
     }
     protected $rules = [

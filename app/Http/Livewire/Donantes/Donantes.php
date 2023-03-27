@@ -5,15 +5,27 @@ namespace App\Http\Livewire\Donantes;
 use App\Models\Donante;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
 class Donantes extends Component
 {
     use WithFileUploads;
+    use WithPagination;
 
     // varibales para controlar modales
     public $modal = false, $edit = false, $delete = false;
     // variables para los registros de donantes
-    public $donantes, $donante_id, $nombre, $logo, $identificador;
+    //public $donantes, 
+    public $donante_id, $nombre, $logo, $identificador;
+
+    protected $rules = [
+        'nombre' => 'required',
+        //'logo' => 'image|mimes:image/jpeg,image/jpg,image/png'
+    ];
+
+    protected $messages = [
+        'nombre.required' => 'Debe ingresar un nombre',
+    ];
 
     public function mount() {
         $this->modal = false;
@@ -23,13 +35,15 @@ class Donantes extends Component
     }
     public function render()
     {
-        $this->donantes = Donante::all();
-        return view('livewire.donantes.donantes');
+        //$this->donantes = Donante::paginate(5);
+        return view('livewire.donantes.donantes', [
+            'donantes' => Donante::paginate(5)
+        ]);
     }
 
     public function save() {
         $id = $this->donante_id;
-
+        $this->validate();
         Donante::updateOrCreate(['id' => $id], [
             'nombre' => $this->nombre,
             'file_name' => $this->logo ? $this->logo->getClientOriginalName() : '',
@@ -39,6 +53,8 @@ class Donantes extends Component
 
         $this->limpiarCampos();
         $this->identificador = rand();
+        $this->dispatchBrowserEvent('swal:modal',[
+        ]);
     }
 
     public function show($id) {
@@ -57,6 +73,8 @@ class Donantes extends Component
     public function deleteDonante() {
         $donante = Donante::findOrFail($this->donante_id);
         $donante->delete();
+        $this->dispatchBrowserEvent('swal:delete',[
+        ]);
     }
 
     public function abrirModal()

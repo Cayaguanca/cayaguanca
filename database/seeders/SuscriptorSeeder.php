@@ -31,5 +31,13 @@ class SuscriptorSeeder extends Seeder
             'email' => 'suscriptor4@email.com',
             'fecha' => '2022/12/10'
         ]);
+        DB::table('suscriptores')->insert([
+            'email' => 'suscriptor5@email.com',
+            'fecha' => '2022/12/10'
+        ]);
+        DB::table('suscriptores')->insert([
+            'email' => 'suscriptor6@email.com',
+            'fecha' => '2022/12/10'
+        ]);
     }
 }
