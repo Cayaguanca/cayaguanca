@@ -85,8 +85,8 @@
             <div class="row g-4">
                 @foreach ($eventos as $evento)    
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="service-item rounded d-flex h-100">
-                            @if (count($proyecto->media_proyecto) != 0)    
+                        <div class="service-item rounded h-100">
+                            @if (count($evento->media_eventos) != 0)    
                                 <div class="service-img rounded">
                                     <img class="img-fluid" src={{ asset($evento->media_eventos[0]->file_path ) }} alt="">
                                 </div>
@@ -95,9 +95,9 @@
                                 <div class="btn-square rounded-circle mx-auto mb-3">
                                     <img class="img-fluid" src="{{ asset('img/icon/icon-3.png') }}" alt="Icon">
                                 </div>
-                                <h4 class="mb-3">Landscaping</h4>
-                                <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
-                                <a class="btn btn-sm" href=""><i class="fa fa-plus text-primary me-2"></i>Ver detalles</a>
+                                <h4 class="mb-3">{{ $evento->nombre_evento }}</h4>
+                                <p class="mb-4">{{ $evento->descripcion_evento }}</p>
+                                <a class="btn btn-sm" href="{{ route('VerEventos',$evento->id) }}"><i class="fa fa-plus text-primary me-2"></i>Ver detalles</a>
                             </div>
                         </div>
                     </div>

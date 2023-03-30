@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Suscriptores;
 
 use App\Models\Suscriptor;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Suscriptores extends Component
 {

@@ -1,5 +1,4 @@
 <div>
-   
     <div class="container p-5">
         <h1>Suscritores Newsletter</h1>
         <div class="d-flex bd-highlight">
@@ -26,7 +25,8 @@
                         </tr>
                     @endforeach
                 </tbody>
-          </table>
+            </table>
+            {{ $suscriptores->links('pagination') }}
         </div>
     </div>
 </div>
