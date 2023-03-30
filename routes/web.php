@@ -2,13 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Eventos\VerEvento;
-<<<<<<< HEAD
-use App\Mail\ContactanosEmail;
-use Illuminate\Support\Facades\Mail;
-=======
 use App\Http\Livewire\Proyectos\VerProyecto;
 use App\Http\Livewire\Proyectos\VerProyectos;
->>>>>>> 6a44401b75d5daafd6ef351b28859aa0634c2f9b
 
 /*
 |--------------------------------------------------------------------------
@@ -41,12 +36,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('proyectos/ver/{id}', VerProyecto::class)->name('VerProyecto');
     Route::view('/perfil','usuarios.perfil')->name('Perfil');
     Route::view('/acercadenosotros','nosotros.acerca')->name('AcercaDeNosotros');
-<<<<<<< HEAD
-    Route::view('/contactanos','nosotros.contactanos')->name('Contactanos');
-    
-=======
     Route::view('/proyectos_finalizados', 'proyectos.proyectos-finalizados')->name('ListaProyTerminados');
->>>>>>> 6a44401b75d5daafd6ef351b28859aa0634c2f9b
+    Route::view('/contactanos','nosotros.contactanos')->name('Contactanos');
 });
 
 Route::group(['middleware' => 'guest'], function () {
