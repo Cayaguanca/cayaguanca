@@ -16,7 +16,10 @@ class Perfil extends Component
     use WithFileUploads;
     use HasProfilePhoto;
 
-    public $role, $usuario, $user_id, $nombres, $apellidos, $email, $foto;
+    protected $listeners=[
+        'eliminar' => 'deleteFoto'//recibir la confirmación de la alerta para eliminar
+    ];
+    public $role, $usuario, $user_id, $nombres, $apellidos, $email, $foto, $foto_antigua;
     public function render()
     {
         $users = auth()->user()->id;
@@ -70,6 +73,28 @@ class Perfil extends Component
 
         $this->dispatchBrowserEvent('swal:confirmacion',[
             'title' => 'Usuario Actualizado',
+        ]);
+    }
+    public function delete($id){
+        $this->user_id = $id;
+        $this->dispatchBrowserEvent('swal:confirmarDelete',[
+            'title' => '¿Seguro que desea eliminar la foto de perfil?',
+        ]);    
+    }
+    public function deleteFoto() {
+        $usuario = User::findOrFail($this->user_id);
+
+        $url = str_replace('storage', 'public', $usuario->file_path);
+        Storage::delete($url);
+
+        $usuario->file_name = null;
+        $usuario->file_extension = null;
+        $usuario->file_path = null;
+        $this->foto = null;
+
+        $usuario->save();
+        $this->dispatchBrowserEvent('swal:confirmacion',[
+            'title' => 'Foto Eliminada correctamente',
         ]);
     }
 }

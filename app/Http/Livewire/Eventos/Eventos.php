@@ -9,9 +9,8 @@ use App\Models\Donante;
 use App\Models\MediaEvento;
 use App\Models\Municipio;
 use App\Models\Evento;
-use Composer\EventDispatcher\Event;
 use Illuminate\Support\Facades\DB;
-use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Storage;
 use Livewire\WithPagination;
 
 class Eventos extends Component
@@ -23,13 +22,13 @@ class Eventos extends Component
     public $modal=false;
     public $detallesAdd=[], $donanteAdd=[], $municipiosAdd=[];
     //variables de tabla evento
-    public  $id_evento, $nombre_evento, $descripcion_evento;
+    public $id_evento, $nombre_evento, $descripcion_evento;
 
     //variables de tabla detalle de evento
     public $id_detalle_evento, $direccion_evento, $fecha_evento, $atach_detalle=[];
 
     //variables de tabla donante evento
-    public  $donantes, $eventoDonante_id, $donante_id, $atach_donante=[];
+    public $donantes, $eventoDonante_id, $donante_id, $atach_donante=[];
 
     //variables de tabla municipio evento
     public $municipios, $eventoMunicipio_id, $municipio_id, $atach_municipio=[];
@@ -37,6 +36,7 @@ class Eventos extends Component
     //variables de tabla media evento
     public $file_name, $file_extension, $file_path, $eventoImg_id, $files=[],$img;
 
+    public $search = '';
 
     protected $listeners=[
         'actualizar' => 'render',
@@ -47,18 +47,35 @@ class Eventos extends Component
         $this->municipios = Municipio::all();
         $this->donantes = Donante::all();
     }
+    
+    
     public function render()
     {   
-        //$this->eventos = Evento::orderBy('created_at','desc')->get();
         $this->municipios = Municipio::all();
         $this->donantes = Donante::all();
 
         return view('livewire.eventos.eventos',[
-            'eventos'=>Evento::orderBy('created_at','desc')->paginate(5),
+            'eventos'=>Evento::orderBy('created_at','desc')->where('nombre_evento','LIKE','%'.$this->search.'%')->paginate(5),
         ]);
     }
 
+    protected $messages = [
+        'nombre_evento.required' => 'El campo nombre evento es obligatorio.',
+        'descripcion_evento.required' => 'El campo descripcion evento es obligatorio.',
+        'detallesAdd' => 'Debe Ingresar almenos una direccion',
+        'fecha_evento.required' => 'El campo fecha evento es obligatorio.',
+        'direccion_evento.required' => 'El campo dirección evento es obligatorio.',
+        'municipio_id.required' => 'El campo municipio del evento es obligatorio.',
+        'donante_id' => 'El campo donante del evento es obligatorio.',
+    ];
+
     public function save(){
+        
+        $this->validate([
+            'nombre_evento' => 'required',
+            'descripcion_evento' => 'required',
+            'detallesAdd' => 'required',
+        ]);
         $id = $this->id_evento;
         $this->abrirModal();
         $new_evento = Evento::updateOrCreate(['id' => $id],[
@@ -80,6 +97,7 @@ class Eventos extends Component
         $new_evento->donantes()->attach($this->atach_donante);
 
         $this->limpiar_campos();
+        $this->dispatchBrowserEvent('closeModal'); 
         //Enviar alerta de evento actualizado correctamente
         $this->dispatchBrowserEvent('swal:confirmacion',[
             'title' => 'Evento Guardado con exito'
@@ -88,6 +106,11 @@ class Eventos extends Component
     }
 
     public function save_detalle_evento(){
+        $this->validate([
+            'fecha_evento' => 'required',
+            'direccion_evento' => 'required',
+            'municipio_id' => 'required',
+        ]);
         $new_detalle = new DetalleEvento();
 
         $new_detalle->direccion_evento = $this->direccion_evento;
@@ -110,6 +133,9 @@ class Eventos extends Component
     }
 
     public function save_donante(){
+        $this->validate([
+            'donante_id' => 'required',
+        ]);
         array_push($this->atach_donante,$this->donante_id);
         $var = Donante::findOrFail($this->donante_id);
         array_push($this->donanteAdd,array(
@@ -155,6 +181,9 @@ class Eventos extends Component
         $this->nombre_evento = '';
         $this->descripcion_evento = '';
         $this->fecha_evento = '';
+        $this->direccion_evento = '';
+        $this->municipio_id = '';
+        $this->donante_id = '';
         $this->id_evento = '';
     }
 
@@ -187,8 +216,8 @@ class Eventos extends Component
                 'id' => $donantes->id,
                 'nombre' => $donantes->nombre
             ));
-
         }
+        //dd($this->detallesAdd[0]);
     }
 
     public function delete_donante_evento($id, $donante){
@@ -200,20 +229,35 @@ class Eventos extends Component
 
     public function delete($id){
         $this->id_evento = $id;
-
         $this->dispatchBrowserEvent('swal:confirmarDelete',[
             'title' => '¿Seguro que desea eliminar el evento?',
         ]);    
     }
 
     public function delete_now(){
+        $this->delete_fotos();
         $evento = Evento::where('id','=',$this->id_evento)->with(['detalle_eventos'])->get();
         $detalle = $evento[0]->detalle_eventos;
         Evento::findOrFail($this->id_evento)->delete();
         foreach($detalle as $detalleEvento){
             DetalleEvento::findOrFail($detalleEvento->id)->delete();
-        }
-            
+        }     
+        $this->dispatchBrowserEvent('swal:confirmacion',[
+            'title' => 'Elemento Eliminado con Exito'
+        ]);
     }
+
+    public function delete_fotos()
+    {
+        $programa = Evento::where('id','=',$this->id_evento)->with(['media_evento'])->get();
+
+        foreach($programa[0]->media_evento as $key => $foto){
+            $imagen = MediaEvento::findOrFail($foto->id);
+            $url = str_replace('storage', 'public', $imagen->file_path);
+            Storage::delete($url);
+            $imagen->save();    
+        }
+    }
+
 
 }

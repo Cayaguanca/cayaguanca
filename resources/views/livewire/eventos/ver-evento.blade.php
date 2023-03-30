@@ -117,10 +117,8 @@
     display:flex;
     margin-left: 50px;
     margin-right: 50px;
-    justify-content: space-between;
-    overflow-y: auto;
-    
-
+    justify-content: space-between;   
+    overflow-y: auto; height:120px;
 }
 .opcion_img {
     width: 80px;

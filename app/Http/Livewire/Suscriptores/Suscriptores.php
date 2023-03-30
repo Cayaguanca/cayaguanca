@@ -7,13 +7,12 @@ use Livewire\Component;
 
 class Suscriptores extends Component
 {
-    public $suscriptores;
+    public $search='';
 
     public function render()
     {
-        return view('livewire.suscriptores.suscriptores');
-    }
-    public function mount() {
-        $this->suscriptores = Suscriptor::all();
+        return view('livewire.suscriptores.suscriptores',[
+            'suscriptores'=>Suscriptor::orderBy('created_at','desc')->where('email','LIKE','%'.$this->search.'%')->paginate(5),
+        ]);
     }
 }

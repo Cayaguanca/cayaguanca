@@ -22,7 +22,7 @@ return new class extends Migration
             
             // Llave foránea de evento
             $table->unsignedBigInteger('evento_id');
-            $table->foreign('evento_id')->references('id')->on('eventos')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('evento_id')->references('id')->on('eventos')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
         });

@@ -37,7 +37,7 @@ class Evento extends Model
         return $this->belongsToMany(DetalleEvento::class);
     }
 
-    public function media_eventos() {
+    public function media_evento() {
         return $this->hasMany(MediaEvento::class);
     }
 }

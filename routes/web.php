@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Eventos\VerEvento;
+use App\Mail\ContactanosEmail;
+use Illuminate\Support\Facades\Mail;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +35,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/eventos/ver/{id}', VerEvento::class)->name('VerEventos');
     Route::view('/perfil','usuarios.perfil')->name('Perfil');
     Route::view('/acercadenosotros','nosotros.acerca')->name('AcercaDeNosotros');
+    Route::view('/contactanos','nosotros.contactanos')->name('Contactanos');
+    
 });
 
 Route::group(['middleware' => 'guest'], function () {
