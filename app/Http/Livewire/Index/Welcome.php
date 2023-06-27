@@ -18,6 +18,6 @@ class Welcome extends Component
         //dd($this->eventos[0]->media_eventos);
         //dd(count($this->proyectos[0]->media_proyecto) != 0);
 
-        return view('livewire.index.welcome');
+        return view('livewire.index.welcome')->layout('');
     }
 }

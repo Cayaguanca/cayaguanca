@@ -18,7 +18,7 @@
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">  
+        <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
 
         <!-- Icon Font Stylesheet -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -39,81 +39,13 @@
         @livewireStyles
     </head>
     <body style="background-color: #eef0f7;">
+        @livewire('navigation-menu')
         <!-- Topbar Start -->
-        <div class="container-fluid bg-dark text-light px-0 py-2">
-            <div class="row gx-0 d-none d-lg-flex">
-                <div class="col-lg-7 px-5 text-start">
-                    <div class="h-100 d-inline-flex align-items-center me-4">
-                        <span class="fa fa-phone-alt me-2"></span>
-                        <span>+012 345 6789</span>
-                    </div>
-                    <div class="h-100 d-inline-flex align-items-center">
-                        <span class="far fa-envelope me-2"></span>
-                        <span>info@example.com</span>
-                    </div>
-                </div>
-                <div class="col-lg-5 px-5 text-end">
-                    <div class="h-100 d-inline-flex align-items-center mx-n2 text-end">
-                        <span>Follow Us:</span>
-                        <a class="btn btn-link text-light" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-link text-light" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-link text-light" href=""><i class="fab fa-linkedin-in"></i></a>
-                        <a class="btn btn-link text-light" href=""><i class="fab fa-instagram"></i></a>
-                        @if (Route::has('login'))
-                            @auth
-                                <a href="{{ route('Perfil') }}" class="btn btn-link text-light fw-bold">
-                                    {{ Auth::user()->name }}
-                                </a>
-                                <a class="btn btn-link text-light fw-bold" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión</a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            @else
-                                <a href="{{ route('login') }}" class="btn btn-link text-light fw-bold">Iniciar Sesión</a>
-                            @endauth
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <!-- Topbar End -->
 
         <!-- Navbar Start -->
-        <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
-            <a href="{{ route('index') }}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-                <img src="{{ asset('img/cayaguanca.png') }}" alt="..." height="90">
-                <h1 class="m-0">Cayaguanca</h1>
-            </a>
-            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
-                data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav ms-auto p-4 p-lg-0">
-                    <a href="" class="nav-item nav-link active">Inicio</a>
-                    <a href="" class="nav-item nav-link">Contáctanos</a>
-                    <a href="" class="nav-item nav-link">Sobre Nosotros</a>
-                    @if (Route::has('login'))
-                        @auth
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Administración</a>
-                                <div class="dropdown-menu bg-light m-0">
-                                    <a href="{{ route('ListaUsuarios') }}" class="dropdown-item">Usuarios</a>
-                                    <a href="{{ route('ListaProyectos') }}" class="dropdown-item">Proyectos</a>
-                                    <a href="{{ route('ListaEventos') }}" class="dropdown-item">Eventos</a>
-                                    <a href="{{ route('ListaDonantes') }}" class="dropdown-item">Donantes</a>
-                                    <a href="{{ route('ListaMunicipios') }}" class="dropdown-item">Municipios</a>
-                                    <a href="{{ route('ListaSuscriptores') }}" class="dropdown-item">Suscriptores</a>
-                                    <a href="{{ route('ListaGaleria') }}" class="dropdown-item">Galería</a>
-                                </div>
-                            </div>
-                        @endauth
-                    @endif
-                </div>
-                <a href="" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block">Proyectos<i
-                        class="fa fa-arrow-right ms-3"></i></a>
-            </div>
-        </nav>
+
         <!-- Navbar End -->
 
         <!-- Page Content -->
@@ -202,13 +134,13 @@
 
         <!-- Template Javascript -->
         <script src="{{ asset('js/main.js') }}"></script>
-        
+
         <script src="{{ asset('DataTables/datatables.js') }}"></script>
 
 
         @stack('modals')
         @livewireScripts
-        
+
         <script src="sweetalert2.all.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>

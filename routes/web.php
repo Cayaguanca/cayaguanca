@@ -16,30 +16,27 @@ use App\Http\Livewire\Proyectos\VerProyectos;
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-
-Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-    
+Route::middleware(['auth:sanctum', 'isSuperAdmin', 'isAdmin'])->group(function () {
     Route::view('/donantes', 'donantes.donantes')->name('ListaDonantes');
     Route::view('/proyectos', 'proyectos.proyectos')->name('ListaProyectos');
     Route::view('/municipios', 'municipios.municipios')->name('ListaMunicipios');
     Route::view('/galeria', 'galerias.galerias')->name('ListaGaleria');
-    Route::view('/usuarios', 'usuarios.usuarios')->name('ListaUsuarios');
     Route::view('/suscriptores','suscriptores.suscriptores')->name('ListaSuscriptores');
     Route::view('/eventos','eventos.eventos')->name('ListaEventos');
-    Route::get('/eventos/ver/{id}', VerEvento::class)->name('VerEventos');
-    Route::get('proyectos/ver/{id}', VerProyecto::class)->name('VerProyecto');
     Route::view('/perfil','usuarios.perfil')->name('Perfil');
-    Route::view('/acercadenosotros','nosotros.acerca')->name('AcercaDeNosotros');
-    Route::view('/proyectos_finalizados', 'proyectos.proyectos-finalizados')->name('ListaProyTerminados');
-    Route::view('/contactanos','nosotros.contactanos')->name('Contactanos');
-});
-
-Route::group(['middleware' => 'guest'], function () {
+    /*Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');*/
     Route::view('/', 'index.welcome')->name('index');
 });
+
+Route::middleware(['auth', 'isSuperAdmin'])->group(function () {
+    Route::view('/usuarios', 'usuarios.usuarios')->name('ListaUsuarios');
+});
+
+Route::view('/', 'index.welcome')->name('index');
+Route::get('/eventos/ver/{id}', VerEvento::class)->name('VerEventos');
+Route::get('proyectos/ver/{id}', VerProyecto::class)->name('VerProyecto');
+Route::view('/acercadenosotros','nosotros.acerca')->name('AcercaDeNosotros');
+Route::view('/contactanos','nosotros.contactanos')->name('Contactanos');
+Route::view('/proyectos_finalizados', 'proyectos.proyectos-finalizados')->name('ListaProyTerminados');
