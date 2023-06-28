@@ -16,7 +16,7 @@ use App\Http\Livewire\Proyectos\VerProyectos;
 |
 */
 
-Route::middleware(['auth:sanctum', 'isSuperAdmin', 'isAdmin'])->group(function () {
+Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
     Route::view('/donantes', 'donantes.donantes')->name('ListaDonantes');
     Route::view('/proyectos', 'proyectos.proyectos')->name('ListaProyectos');
     Route::view('/municipios', 'municipios.municipios')->name('ListaMunicipios');
@@ -27,11 +27,19 @@ Route::middleware(['auth:sanctum', 'isSuperAdmin', 'isAdmin'])->group(function (
     /*Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');*/
-    Route::view('/', 'index.welcome')->name('index');
+    //Route::view('/', 'index.welcome')->name('index');
 });
 
-Route::middleware(['auth', 'isSuperAdmin'])->group(function () {
+Route::middleware(['auth:sanctum', 'isSuperAdmin'])->group(function () {
     Route::view('/usuarios', 'usuarios.usuarios')->name('ListaUsuarios');
+
+    Route::view('/donantes', 'donantes.donantes')->name('ListaDonantes');
+    Route::view('/proyectos', 'proyectos.proyectos')->name('ListaProyectos');
+    Route::view('/municipios', 'municipios.municipios')->name('ListaMunicipios');
+    Route::view('/galeria', 'galerias.galerias')->name('ListaGaleria');
+    Route::view('/suscriptores','suscriptores.suscriptores')->name('ListaSuscriptores');
+    Route::view('/eventos','eventos.eventos')->name('ListaEventos');
+    Route::view('/perfil','usuarios.perfil')->name('Perfil');
 });
 
 Route::view('/', 'index.welcome')->name('index');
