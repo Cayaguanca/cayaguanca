@@ -86,9 +86,9 @@
                 @foreach ($eventos as $evento)    
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="service-item rounded h-100">
-                            @if (count($evento->media_eventos) != 0)    
+                            @if (count($evento->media_evento) != 0)    
                                 <div class="service-img rounded">
-                                    <img class="img-fluid" src={{ asset($evento->media_eventos[0]->file_path ) }} alt="">
+                                    <img class="img-fluid" src={{ asset($evento->media_evento[0]->file_path ) }} alt="">
                                 </div>
                             @endif
                             <div class="service-text rounded p-5">
