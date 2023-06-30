@@ -3,18 +3,18 @@
         <div class="col-lg-7 px-5 text-start">
             <div class="h-100 d-inline-flex align-items-center me-4">
                 <span class="fa fa-phone-alt me-2"></span>
-                <span>+012 345 6789</span>
+                <span>2352-9073</span>
             </div>
             <div class="h-100 d-inline-flex align-items-center">
                 <span class="far fa-envelope me-2"></span>
-                <span>info@example.com</span>
+                <span>asociacioncayaguanca@hotmail.com</span>
             </div>
         </div>
         <div class="col-lg-5 px-5 text-end">
             <div class="h-100 d-inline-flex align-items-center mx-n2 text-end">
-                <span>Follow Us:</span>
-                <a class="btn btn-link text-light" href=""><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-link text-light" href=""><i class="fab fa-twitter"></i></a>
+                <span>Síguenos:</span>
+                <a class="btn btn-link text-light" href="https://www.facebook.com/Asociacion.Cayaguanca" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-link text-light" href="https://twitter.com/cdmypecayaguanc" target="_blank"><i class="fab fa-twitter"></i></a>
                 <a class="btn btn-link text-light" href=""><i class="fab fa-linkedin-in"></i></a>
                 <a class="btn btn-link text-light" href=""><i class="fab fa-instagram"></i></a>
                 @if (Route::has('login'))
@@ -48,8 +48,8 @@
     <div :class="{'block': open, 'hidden': ! open}" class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
             <a href="{{ route('index') }}" class="nav-item nav-link active">Inicio</a>
-            <a href="{{ route('AcercaDeNosotros') }}" class="nav-item nav-link">Contáctanos</a>
-            <a href="{{ route('Contactanos') }}" class="nav-item nav-link">Sobre Nosotros</a>
+            <a href="{{ route('Contactanos') }}" class="nav-item nav-link">Contáctanos</a>
+            <a href="{{ route('AcercaDeNosotros') }}" class="nav-item nav-link">Sobre Nosotros</a>
             @if (Route::has('login'))
                 @auth
                     <div class="nav-item dropdown">

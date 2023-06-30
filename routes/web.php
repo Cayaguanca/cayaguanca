@@ -24,10 +24,7 @@ Route::middleware(['auth:sanctum', 'isAdmin'])->group(function () {
     Route::view('/suscriptores','suscriptores.suscriptores')->name('ListaSuscriptores');
     Route::view('/eventos','eventos.eventos')->name('ListaEventos');
     Route::view('/perfil','usuarios.perfil')->name('Perfil');
-    /*Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');*/
-    //Route::view('/', 'index.welcome')->name('index');
+
 });
 
 Route::middleware(['auth:sanctum', 'isSuperAdmin'])->group(function () {

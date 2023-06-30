@@ -21,7 +21,7 @@ class Galerias extends Component
     public function render()
     {
         $this->galeria_proyecto = Proyecto::with(['media_proyecto'])->get();
-        $this->galeria_evento = Evento::with(['media_eventos'])->get();
+        $this->galeria_evento = Evento::with(['media_evento'])->get();
         //dd($this->galeria_evento);
         $this->find();
         return view('livewire.galerias.galerias');
@@ -40,7 +40,7 @@ class Galerias extends Component
     public function save_img(){
         foreach ($this->files as $key => $file){
             $file_save = new MediaProyecto();
-            
+
             $file_save->file_name = $file->getClientOriginalName();
             $file_save->file_extension = $file->extension();
             $file_save->file_path = 'storage/' . $file->store('file', 'public');
@@ -51,14 +51,14 @@ class Galerias extends Component
         }
     }
     public function save_id_evento($id){
-        
+
         $this->files = array();
         $this->id_evento = $id;
     }
     public function save_img_eve(){
         foreach ($this->files as $key => $file){
             $file_save = new MediaEvento();
-            
+
             $file_save->file_name = $file->getClientOriginalName();
             $file_save->file_extension = $file->extension();
             $file_save->file_path = 'storage/' . $file->store('file', 'public');
@@ -70,12 +70,12 @@ class Galerias extends Component
     }
     public function id_img($id){
         //$this->direccion='';
-        
+
         $this->id_file=$id;
         $this->img = MediaProyecto::find($this->id_file);
         $this->direccion = $this->img->file_path;
         //dd($this->direccion);
-        
+
     }
 
     public function delete_img(){
@@ -85,7 +85,7 @@ class Galerias extends Component
         $this->id_file='';
         $this->img = '';
         $this->identificador2=rand();
-        
+
 
     }
     public function delete_foto_pro()
@@ -98,12 +98,12 @@ class Galerias extends Component
 
     public function id_img_eve($id){
         //$this->direccion='';
-        
+
         $this->id_file=$id;
         $this->img = MediaEvento::find($this->id_file);
         $this->direccion = $this->img->file_path;
         //dd($this->direccion);
-        
+
     }
 
     public function delete_img_eve(){
@@ -113,7 +113,7 @@ class Galerias extends Component
         $this->id_file='';
         $this->img = '';
         $this->identificador2=rand();
-        
+
     }
 
     public function delete_foto_eve(){
@@ -127,6 +127,6 @@ class Galerias extends Component
         $this->galeria_proyecto = Proyecto::where('nombre_proyecto','LIKE','%'.$this->search.'%')
         ->with(['media_proyecto'])->get();
         $this->galeria_evento = Evento::where('nombre_evento','LIKE','%'.$this->search.'%')
-        ->with(['media_eventos'])->get();
+        ->with(['media_evento'])->get();
     }
 }

@@ -20,7 +20,7 @@
             <div class="col-8 ms-5 mb-4">
                 <h1 class="mt-4 mb-4">Proyectos Finalizados</h1>
                 @foreach ($proyectos as $proyecto)
-                    @if ($proyecto->fecha_final < date('Y-m-d'))    
+                    @if ($proyecto->fecha_final < date('Y-m-d'))
                         <div class="card mb-3">
                             <div class="row no-gutters">
                                 <div class="col-md-4 d-flex align-items-center">
@@ -36,19 +36,21 @@
                                             {{ $proyecto->descripcion_proyecto }}
                                         </p>
                                         <h5>Municipios</h5>
-                                        @foreach ($proyecto->municipios as $municipio)    
+                                        @foreach ($proyecto->municipios as $municipio)
                                             <p>
                                                 {{ $municipio->nombre_municipio }}
                                             </p>
                                         @endforeach
                                         <h6>Fecha de finalización</h6>
                                         <p>{{ $proyecto->fecha_final }}</p>
-                                        <button type="button" class="btn btn-primary">Ver detalles</button>
+                                        <a href="{{ route('VerProyecto',$proyecto->id) }}">
+                                            <button type="button" class="btn btn-primary">Ver detalles</button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    @endif    
+                    @endif
                 @endforeach
             </div>
         </div>

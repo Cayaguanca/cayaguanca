@@ -28,8 +28,8 @@
                     <div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.1s">
                         <!--Aqui for para imagenes -->
                         <div class="portfolio-inner rounded">
-                            
-                            <img style = "width: 500px; height: 400px; object-fit: contain;" class="img-fluid rounded mx-auto d-block" 
+
+                            <img style = "width: 500px; height: 400px; object-fit: contain;" class="img-fluid rounded mx-auto d-block"
                             src={{asset($media->file_path)}} alt="">
                             <div class="portfolio-text">
                                 <h4 class="text-white mb-4"></h4>
@@ -38,7 +38,7 @@
                                         data-lightbox="portfolio" data-bs-toggle="modal" data-bs-target="#viewImg">
                                         <i class="fa fa-eye"></i>
                                     </a>
-                                    <a wire:click="id_img({{$media->id}})" class="btn btn-lg-square rounded-circle mx-2" 
+                                    <a wire:click="id_img({{$media->id}})" class="btn btn-lg-square rounded-circle mx-2"
                                     data-bs-toggle="modal" data-bs-target="#deleteImg">
                                         <i class="fa fa-trash"></i>
                                     </a>
@@ -51,23 +51,23 @@
             </div>
             @endforeach
             <!-- comienza el ciclo for  para eventos-->
-            
+
                 <!--Comienza for de eventos -->
             @foreach($galeria_evento as $evento)
             <div class="container my-3 ">
                 <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
                     <h2 class="display-5 mb-5">{{$evento->nombre_evento}}</h2>
                     <p>{{$evento->descripcion_evento}}</p>
-                    
+
                     <button wire:click="save_id_evento({{$evento->id}})" type="button" data-bs-toggle="modal" data-bs-target="#uploadImgModalEve" class="btn btn-secondary">
                     Cargar imagenes a galeria</button>
                 </div>
                 <div class="row g-4 portfolio-container my-2">
-                    @foreach($evento->media_eventos as $imagen)
+                    @foreach($evento->media_evento as $imagen)
                     <!--Inicio de for para imagenes -->
                     <div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.1s">
                         <div class="portfolio-inner rounded ">
-                            <img style = "width: 500px; height: 400px; object-fit: contain;" class="img-fluid rounded mx-auto d-block" 
+                            <img style = "width: 500px; height: 400px; object-fit: contain;" class="img-fluid rounded mx-auto d-block"
                             src={{asset($imagen->file_path)}} alt="">
                             <div class="portfolio-text">
                                 <h4 class="text-white mb-4"></h4>
@@ -76,7 +76,7 @@
                                     data-lightbox="portfolio" data-bs-toggle="modal" data-bs-target="#viewImg">
                                     <i class="fa fa-eye"></i>
                                     </a>
-                                    <a wire:click="id_img_eve({{$imagen->id}})" class="btn btn-lg-square rounded-circle mx-2" 
+                                    <a wire:click="id_img_eve({{$imagen->id}})" class="btn btn-lg-square rounded-circle mx-2"
                                     data-bs-toggle="modal" data-bs-target="#deleteImgEve">
                                         <i class="fa fa-trash"></i>
                                     </a>
@@ -144,7 +144,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    
+
                     <button wire:click="delete_img()" type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Eliminar</button>
 
                 </div>
