@@ -38,7 +38,7 @@
 <nav x-data="{ open: false }" class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
     <x-responsive-nav-link class="navbar-brand d-flex align-items-center px-4 px-lg-5" href="{{ route('index') }}" :active="request()->routeIs('dashboard')">
         <img src="{{ asset('img/cayaguanca.png') }}" alt="..." height="90">
-        <h1 class="m-0">Cayaguanca</h1>
+        <h1 class="m-0">INICIO</h1>
     </x-responsive-nav-link>
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
