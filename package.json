@@ -2,7 +2,6 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build:digitalocean": "npm install --production=false && npm run build && npm ci",
         "build": "vite build"
     },
     "devDependencies": {
