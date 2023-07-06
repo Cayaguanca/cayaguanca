@@ -23,7 +23,7 @@
         "datatables.net-dt": "^1.13.4"
     },
     "engines": {
-        "node": "18.x",
+        "node": "16.x",
         "npm": "9.5.1"
     }
 }
