@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->id();
+            //$table->id();
             $table->text('two_factor_secret')
                     ->after('password')
                     ->nullable();
